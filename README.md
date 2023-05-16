@@ -1,4 +1,4 @@
-# COP4331 Small Project - Contact Manage Application
+# COP4331 Small Project - Contact Manager Application
 
 </br>This repository will be used for Group 6's COP 4331 Small Project, which will be a contact manager application developed using the LAMP Stack (Linux, Apache, MySQL, and PHP). </br></br>
 
