@@ -9,8 +9,8 @@
   <li>Drew Slauter (Frontend Developer)</li>
   <li>Berkay Arslan (Frontend Developer)</li>
   <li>Christopher Dugazon (Database Administrator)</li>
- </ul></br></br>
+ </ul></br>
 
-<strong><a href = 'https://trello.com/invite/b/ycXXadMh/ATTI57e55c534bca39eef8cc394f96e38ac74F74E4DB/small-project'>Trello Board</a></strong>📋
+<strong><a href = 'https://trello.com/invite/b/ycXXadMh/ATTI57e55c534bca39eef8cc394f96e38ac74F74E4DB/small-project'>Trello Board</a></strong>📋</br></br>
 <strong><a href = 'https://www.canva.com/design/DAFjLClJCH0/ceX129p6ia-2y5CSIF5tcA/edit?utm_content=DAFjLClJCH0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton'>Design</a></strong> 🎨
   
