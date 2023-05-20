@@ -3,6 +3,8 @@
     // login (very basic), check if username and password match with database one
 
         // db connection stuff (not sure yet what username and password it will be)
+
+        $data =  get_info();
         $db_name = ''; // not created yet
         $db_username = '';
         $db_pwd = '';
