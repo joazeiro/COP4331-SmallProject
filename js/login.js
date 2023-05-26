@@ -1,34 +1,44 @@
-window.addEventListener("load", () => 
-{
+function sendData(){
 
-    function sendData(){
+    const myRequest = new XMLHttpRequest();
 
-        const myRequest = new XMLHttpRequest();
+    const loginFormData = new FormData(loginForm);
 
-        const loginFormData = new FormData(loginForm);
+    var loginFormObject = {};
 
-        myRequest.addEventListener("load", (event) =>
-        {
+    loginFormData.forEach((value, key) => loginFormObject[key] = value);
 
-            alert(event.target.responseText);
+    var loginFormDataJSON = JSON.stringify(loginFormObject);
 
-        });
-
-        myRequest.open("POST", "/api/login.php");
-
-        myRequest.send();
-
-    }
-
-    const loginForm = document.getElementById("loginForm");
-
-    loginForm.addEventListener("submit", (event) =>
+    myRequest.addEventListener("load", (event) =>
     {
 
-        event.preventDefault();
-
-        sendData();
+        window.location.href = "schedule.html";
 
     });
+
+    myRequest.addEventListener("error", (event) =>
+    {
+
+        document.getElementById("loginFailedSpan").innerHTML = "Login failed.";
+
+    });
+
+    myRequest.open("POST", "/api/login.php");
+
+    myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8")
+
+    myRequest.send(loginFormDataJSON);
+
+}
+
+const loginForm = document.getElementById("loginForm");
+
+loginForm.addEventListener("submit", (event) =>
+{
+
+    event.preventDefault();
+
+    sendData();
 
 });
