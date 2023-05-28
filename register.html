@@ -64,26 +64,32 @@
 <body>
   <div class="container">
     <h2>Register</h2>
-    <form action="#" method="post">
+    <form id="registrationForm" action="#" method="post">
       <div class="form-group">
-        <label for="register-name">Name:</label>
-        <input type="text" id="register-name" name="register-name" required>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
       </div>
       <div class="form-group">
-        <label for="register-email">Email:</label>
-        <input type="email" id="register-email" name="register-email" required>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
       </div>
       <div class="form-group">
-        <label for="register-password">Password:</label>
-        <input type="password" id="register-password" name="register-password" required>
+        <label for="login">Email:</label>
+        <input type="email" id="login" name="login" placeholder="example@email.com" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="password" required>
       </div>
       <div class="form-group">
         <input type="submit" value="Register">
       </div>
     </form>
+    <span id="registrationResult"></span>
     <div class="login-link">
       <a href="login.html">Login here</a>
     </div>
   </div>
+  <script type="module" src="js/register.js"></script>
 </body>
 </html>
