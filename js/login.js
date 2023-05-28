@@ -10,21 +10,11 @@ document.addEventListener("DOMContentLoaded", onDocumentLoad(), false);
 function onDocumentLoad()
 {
 
-    readCookie();
+    myContact = readCookie();
 
 }
 
 function sendData(){
-
-    myContact.firstName="Bruh";
-
-    myContact.userID=1000;
-
-    saveCookie(myContact);
-
-    window.location.href = "contactmanager.html";
-
-    return;
 
     const loginFormData = new FormData(loginForm);
 

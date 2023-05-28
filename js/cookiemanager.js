@@ -95,3 +95,10 @@ export function saveCookie(myContact)
     `expires=${expirationDate}`;
 
 }
+
+export function clearCookie()
+{
+
+    document.cookie = "expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
+}

@@ -1,5 +1,5 @@
 import { Contact } from "./contact.js";
-import { readCookie, saveCookie } from "./cookiemanager.js";
+import { readCookie, saveCookie, clearCookie } from "./cookiemanager.js";
 
 let myContact = new Contact;
 
@@ -8,10 +8,15 @@ document.addEventListener("DOMContentLoaded", onDocumentLoad(), false)
 function onDocumentLoad()
 {
 
-    readCookie();
+    myContact = readCookie();
 
-    myContact.firstName = "OGEYRAT";
+}
 
-    alert(myContact);
+function logOut()
+{
+
+    myContact.ClearContact();
+
+    document.cookie = "expires=Thu, 01 Jan 1970 00:00:00 GMT";
 
 }
