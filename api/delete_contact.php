@@ -1,31 +1,34 @@
 <?php
-    // this will be used to permanently remove a contact from our list
-    // remember to add the dialog box confirming that the user wants to delete it 
+    $data = json_decode(file_get_contents('php://input'), true);
 
-    /* ALERT BOX EXAMPLE FOR FUTURE REFERENCE
+    $db_username = "";
+    $db_pwd = "";
+    $db_name = "";
 
-    <?php
-        function_alert("We welcome the New World");
+    $conn = new mysqli("localhost", $db_username, $db_pwd, $db_name);
 
-        function function_alert($msg) {
-            echo "<script type='text/javascript'>alert('$msg');</script>";
-        }
-    ?>
+    if($db_connection->connect_error){
 
-    <?php
-        function  createConfirmationmbox(){
-            echo '<script type="text/javascript"> ';
-            echo ' function openulr(newurl) {';
-            echo '  if (confirm("Are you sure you want to open new URL")) {';
-            echo '    document.location = newurl;';
-            echo '  }';
-            echo '}';
-            echo '</script>';
-        }
-    ?>
-    <?php
-        createConfirmationmbox();
-    ?>
-    */
+        $message = '{"message":"' . $db_connection->connect_error . '"}'
+        header('Content-type: application/json');
+		echo $message;
+    }
 
+    else{
+        $sql = "DELETE FROM contact WHERE (`ID` = " . $data["ID"] . " AND `user_ID` = " . $data["user_ID"] . ");";
+		$result = $db_connection->query($sql);
+		
+		if($result === true){
+			$message = '{"message":"Deleted"}';
+		}
+
+		else{
+			$message = '{"message":"not Deleted"}';
+		}
+
+        header('Content-type: application/json');
+		echo $message;
+		
+		$db_connection->close();
+	}
 ?>
