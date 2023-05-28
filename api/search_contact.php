@@ -1,2 +1,4 @@
-// the searching will be implemented here
-// remember to implement first and last name search
+<?php
+    // the searching will be implemented here
+    // remember to implement first and last name search
+?>

@@ -1,1 +1,4 @@
-// this will allow us to edit the contact
+<?php
+    // this will allow us to edit the contact
+
+?>
