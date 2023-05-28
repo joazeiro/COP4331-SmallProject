@@ -6,7 +6,7 @@
     $db_pwd = "";
     $db_name = "";
 
-    $conn = new mysqli("localhost", $db_username, $db_pwd, $db_name);
+    $db_connection = new mysqli("localhost", $db_username, $db_pwd, $db_name);
 
     if($db_connection->connect_error){
 
