@@ -1,3 +1,5 @@
+import { url } from "./sharedVariables.js";
+
 function sendData(){
 
     const registrationFormData = new FormData(registrationForm);
@@ -10,7 +12,7 @@ function sendData(){
 
     const myRequest = new XMLHttpRequest();
 
-    myRequest.open("POST", `http://127.0.0.1:5500/api/sign_up.php`);
+    myRequest.open("POST", `${url}/api/sign_up.php`);
 
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8")
 

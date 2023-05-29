@@ -1,3 +1,5 @@
+import { url } from "./sharedVariables.js";
+
 export class CookieManager
 {
 
@@ -8,8 +10,6 @@ export class CookieManager
     static userID = -1;
 
     static #lifespan = 1200000;
-
-    static #loginURL = "/login.html";
 
     static read()
     {
@@ -53,10 +53,10 @@ export class CookieManager
     
         }
     
-        if(this.userID < 0 && window.location.pathname != this.#loginURL)
+        if(this.userID < 0 && window.location.pathname != `${url}/login.html`)
         {
 
-            window.location.href = CookieManager.#loginURL;
+            window.location.href = `${url}/login.html`;
 
         }
 

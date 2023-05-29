@@ -1,6 +1,6 @@
-import { CookieManager } from "./cookiemanager.js";
+import { url } from "./sharedVariables.js";
 
-//let myCookieObj = new CookieObj();
+import { CookieManager } from "./cookiemanager.js";
 
 const loginForm = document.getElementById("loginForm");
 
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", onDocumentLoad(), false);
 function onDocumentLoad()
 {
 
-    //CookieManager.read();
+    CookieManager.read();
 
 }
 
@@ -25,7 +25,7 @@ function sendData(){
 
     const myRequest = new XMLHttpRequest();
 
-    myRequest.open("POST", `http://127.0.0.1:5500/api/login.php`);
+    myRequest.open("POST", `${url}/api/login.php`);
 
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8")
 
@@ -43,7 +43,7 @@ function sendData(){
 
                 if(CookieManager.userID < 1){
 
-                    document.getElementById("loginFailedSpan").innerHTML = "Incorrect username and password combination.";
+                    document.getElementById("loginStatus").innerHTML = "Incorrect username and password combination.";
 
                     return;
 
