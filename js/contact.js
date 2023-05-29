@@ -5,39 +5,32 @@ export class Contact
 
     lastName;
 
-    phoneNumber;
-
     email;
 
-    userID;
+    phone;
 
-    constructor(firstName="", lastName="", phoneNumber="", email="", userID=-1)
+    linkedin;
+
+    dateCreated;
+
+    id;
+
+    constructor(firstName="", lastName="", email="", phone="", linkedin="", dateCreated="", id="")
     {
 
         this.firstName = firstName;
 
         this.lastName = lastName;
-
-        this.phoneNumber = phoneNumber;
-
+        
         this.email = email;
 
-        this.userID = userID;
+        this.phone = phone;
 
-    }
+        this.linkedin = linkedin;
 
-    ClearContact()
-    {
+        this.dateCreated = dateCreated;
 
-        this.firstName = "";
-
-        this.lastName = "";
-
-        this.phoneNumber = "";
-
-        this.email = "";
-
-        this.userID = -1;
+        this.id = id;
 
     }
 

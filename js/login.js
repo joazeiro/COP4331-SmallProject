@@ -1,7 +1,6 @@
-import { Contact } from "./contact.js";
-import { readCookie, saveCookie } from "./cookiemanager.js";
+import { CookieManager } from "./cookiemanager.js";
 
-let myContact = new Contact();
+//let myCookieObj = new CookieObj();
 
 const loginForm = document.getElementById("loginForm");
 
@@ -10,7 +9,7 @@ document.addEventListener("DOMContentLoaded", onDocumentLoad(), false);
 function onDocumentLoad()
 {
 
-    myContact = readCookie();
+    //CookieManager.read();
 
 }
 
@@ -40,9 +39,9 @@ function sendData(){
 
                 let jsonObject = JSON.parse(myRequest.responseText);
 
-                myContact.userID = jsonObject.id;
+                CookieManager.userID = jsonObject.id;
 
-                if(myContact.userID < 1){
+                if(CookieManager.userID < 1){
 
                     document.getElementById("loginFailedSpan").innerHTML = "Incorrect username and password combination.";
 
@@ -50,13 +49,11 @@ function sendData(){
 
                 }
 
-                myContact.firstName = jsonObject.firstName;
+                CookieManager.firstName = jsonObject.firstName;
 
-                myContact.lastName = jsonObject.lastName;
+                CookieManager.lastName = jsonObject.lastName;
 
-                myContact.email = loginFormObject[email];
-
-                saveCookie(myContact);
+                CookieManager.save();
 
                 window.location.href = "contactmanager.html";
         
@@ -79,11 +76,7 @@ function sendData(){
 loginForm.addEventListener("submit", (event) =>
 {
 
-    myContact.userID = 0;
-
-    myContact.firstName = "";
-
-    myContact.lastName = "";
+    CookieManager.clear();
 
     event.preventDefault();
 

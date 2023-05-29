@@ -1,5 +1,3 @@
-import { Contact } from "./contact.js";
-
 function sendData(){
 
     const registrationFormData = new FormData(registrationForm);
