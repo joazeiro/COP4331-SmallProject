@@ -53,10 +53,12 @@ export class CookieManager
     
         }
     
-        if(this.userID < 0 && window.location.pathname != `${url}/login.html`)
+        if(this.userID < 0 && window.location.pathname != `/login.html`)
         {
 
-            window.location.href = `${url}/login.html`;
+            alert(window.location.pathname);
+
+            window.location.href = `/login.html`;
 
         }
 

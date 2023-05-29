@@ -1,1 +1,1 @@
-export let url = "http://parkermcleod.com";
+export let url = "http://127.0.0.1:5500";
