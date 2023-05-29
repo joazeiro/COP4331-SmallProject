@@ -29,7 +29,7 @@ CREATE TABLE `ContactDatabase`.`contact`
     `ZIP_Code` VARCHAR(50) NOT NULL DEFAULT '' ,
     `user_ID` INT NOT NULL DEFAULT '0' ,
     PRIMARY KEY (`ID`),
-    FOREIGN KEY (`user_ID`) REFERENCES `ContactDatabase`.`users` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (`user_ID`) REFERENCES `ContactDatabase`.`users` (`ID`)
 ) ENGINE = InnoDB;
 
 insert into users (FirstName,LastName,Login,Password) VALUES ('Christopher','Dugazon','ChrisD','admin');
