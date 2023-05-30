@@ -1,59 +1,86 @@
-const urlBase = 'http://parkercmcleod.com';
-const extension = 'php';
+import { url } from "./sharedVariables.js";
 
-let userId = 0;
+import { CookieManager } from "./cookiemanager.js";
 
-function LogIn(){
+const loginForm = document.getElementById("loginForm");
 
-    let username = document.getElementById("loginUsername").value;
+document.addEventListener("DOMContentLoaded", onDocumentLoad(), false);
 
-    let password = document.getElementById("loginPassword").value;
+function onDocumentLoad()
+{
 
-    let temp = {db_username:username, db_password:password}
+    CookieManager.read();
 
-    let jsonPayload = JSON.stringify(tmp);
+}
 
-    let url = urlBase + '/login.' + extension;
+function sendData(){
 
-    let xhr = new XMLHttpRequest();
+    const loginFormData = new FormData(loginForm);
 
-    xhr.open("POST", url, true);
+    var loginFormObject = {};
 
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    loginFormData.forEach((value, key) => loginFormObject[key] = value);
+
+    var loginFormDataJSON = JSON.stringify(loginFormObject);
+
+    const myRequest = new XMLHttpRequest();
+
+    myRequest.open("POST", `${url}/api/login.php`);
+
+    myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8")
 
     try{
 
-        xhr.onreadystatechange(() => 
+        myRequest.onreadystatechange = () =>
         {
 
-            if(this.readyState == 4 && this.status == 200){
+            if(this.readystate == 4 && this.status == 200)
+            {
 
-                let response = JSON.parse(xhr.responseText);
+                let jsonObject = JSON.parse(myRequest.responseText);
 
-                userId = response.id;
+                CookieManager.userID = jsonObject.id;
 
+                if(CookieManager.userID < 1){
 
-                if(userId < 1){
-
-                    document.getElementById("loginResult").innerHTML = "Incorrect credentials";
+                    document.getElementById("loginStatus").innerHTML = "Incorrect username and password combination.";
 
                     return;
 
                 }
-                
+
+                CookieManager.firstName = jsonObject.firstName;
+
+                CookieManager.lastName = jsonObject.lastName;
+
+                CookieManager.save();
+
+                window.location.href = "contactmanager.html";
+        
+
             }
 
-        });
+        }
 
-        xhr.send(jsonPayload);
+        myRequest.send(loginFormDataJSON);
 
     }
-    
-    catch(error)
+    catch(err)
     {
 
-        document.getElementById("loginResult").innerHTML = error.message;
+        document.getElementById("loginFailedSpan").innerHTML = err.message;
 
     }
 
 }
+
+loginForm.addEventListener("submit", (event) =>
+{
+
+    CookieManager.clear();
+
+    event.preventDefault();
+
+    sendData();
+
+});
