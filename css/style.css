@@ -1,9 +1,22 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #025464;
   }
+
+  .logo{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: #F8F1F1;
+    font-size: 40px;
+    margin-left: 350px;
+
+  }
+
   .container {
-    background-color: #fefefe;
-    margin: 0 auto;
+    position: absolute;
+    background-color: #F8F1F1;
+    /*margin: 0 auto;*/
+    margin-top: 70px;
+    margin-left:500px;
     width: 300px;
     padding: 20px;
     border-radius: 10px;
@@ -23,17 +36,19 @@ body {
     width: 100%;
     font-size: 18px;
     border-radius: 5px;
+    padding: 2px;
     border: 1px solid rgba(0, 0, 0, 0.3);
   }
   .form-group input[type="submit"] {
-    background-color: #0095F6;
-    color: white;
+    background-color: #E57C23;
+    color: #F8F1F1;
     cursor: pointer;
     border-radius: 5px;
+    padding: 7px;
     border: none;
   }
   .form-group input[type="submit"]:hover {
-    background-color: #0095F6;
+    background-color: #E8AA42;
   }
   .link {
     text-align: center;
