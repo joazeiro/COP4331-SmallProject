@@ -47,6 +47,7 @@ body {
 .form-group label {
   display: block;
   margin-bottom: 10px;
+  color: #025464; /* Added color */
 }
 
 .form-group input {
@@ -141,3 +142,4 @@ body {
 .myTable td {
   border: 1px solid;
 }
+
