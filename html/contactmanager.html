@@ -2,33 +2,37 @@
 <html>
 <head>
   <title>Contacts</title>
-  <link href="../css/style.css" rel="stylesheet">  
+  <link href="../css/style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <h1>Contacts Manager</h1> 
 
   <div id="loginOutDiv">
-    <span id ="username"></span>
+    <span id="username"></span>
     <button type="button" id="logoutButton">Log Out</button>
   </div>
 
   <div>
     <table id="contactTable">
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Linkedin</th>
-        <th>ID</th>
-        <th>Date Created</th>
-      </tr>
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Linkedin</th>
+          <th>ID</th>
+          <th>Date Created</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
     </table>
     <span id="searchContactResult"></span>
   </div>
 
   <div id="contactDiv">
-    <input type="text" id="searchText" placeholder="Search for contact"></input>
+    <input type="text" id="searchText" placeholder="Search for contact">
     <button type="button" id="searchButton">Search</button>
   </div>
 
@@ -49,7 +53,7 @@
         </div>
         <div class="form-group">
           <label for="Email">Email:</label>
-          <input type="email" name="Email" placeholder="example@email.com">
+          <input type="email" name="Email" placeholder="example@example.com">
         </div>
         <div class="form-group">
           <label for="PhoneNumber">Phone:</label>
@@ -73,27 +77,27 @@
       <h2>Edit Contact</h2>
       <form id="editContactForm" method="post" action="#">
         <div class="form-group">
-          <label for="FirstName">First Name:</label>
+          <label for="editFirstName">First Name:</label>
           <input type="text" id="editFirstName" name="FirstName" placeholder="Jane" required>
         </div>
         <div class="form-group">
-          <label for="LastName">Last Name:</label>
+          <label for="editLastName">Last Name:</label>
           <input type="text" id="editLastName" name="LastName" placeholder="Doe">
         </div>
         <div class="form-group">
-          <label for="Email">Email:</label>
-          <input type="email" id="editEmail" name="Email" placeholder="example@email.com">
+          <label for="editEmail">Email:</label>
+          <input type="email" id="editEmail" name="Email" placeholder="example@example.com">
         </div>
         <div class="form-group">
-          <label for="PhoneNumber">Phone:</label>
-          <input type="text" id="editPhone" name="phone" placeholder="999-999-9999">
+          <label for="editPhone">Phone:</label>
+          <input type="text" id="editPhone" name="PhoneNumber" placeholder="999-999-9999">
         </div>
         <div class="form-group">
-          <label for="linkedin">Linkedin:</label>
+          <label for="editLinkedin">Linkedin:</label>
           <input type="url" id="editLinkedin" name="linkedin">
         </div>
         <div class="form-group">
-          <input type="submit" value="Add Contact">
+          <input type="submit" value="Edit Contact">
         </div>
       </form>
       <span id="editContactResult"></span>
@@ -104,16 +108,19 @@
     <div class="container">
       <span id="deleteContactClose" class="close">&times;</span>
       <h2>Delete Contact?</h2>
-      <span id="deleteContactFirstName"></span>
-      <span id="deleteContactLastName"></span>
-      <span id="deleteContactEmail"></span>
-      <span id="deleteContactPhone"></span>
-      <span id="deleteContactLinkedin"></span>
-      <span id="deleteContactId"></span>
-      <span id="deleteContactDateCreated"></span>
+      <p>
+        <span id="deleteContactFirstName"></span>
+        <span id="deleteContactLastName"></span>
+        <span id="deleteContactEmail"></span>
+        <span id="deleteContactPhone"></span>
+        <span id="deleteContactLinkedin"></span>
+        <span id="deleteContactId"></span>
+        <span id="deleteContactDateCreated"></span>
+      </p>
       <button type="button" id="deleteCancelButton">Cancel</button>
       <button type="button" id="deleteConfirmButton">Confirm</button>
       <span id="deleteContactResult"></span>
+    </div>
   </div>
 
   <script type="module" src="../js/contactmanager.js"></script>

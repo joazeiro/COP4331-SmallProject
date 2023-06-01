@@ -2,6 +2,8 @@
 body, h1, h2, h3, h4, h5, h6, p, ul, ol, li {
   margin: 0;
   padding: 0;
+  font-size: 100%;
+  font-weight: normal;
 }
 
 body {
@@ -10,24 +12,24 @@ body {
 }
 
 .logo {
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: 'Roboto', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: #F8F1F1;
-  font-size: 40px;
+  font-size: 48px; /* Increase the font size */
   text-align: center;
-  margin-top: 50px;
+  margin-top: 20px; /* Reduce the margin-top */
 }
 
 .center-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  height: 100vh;
+  align-items: flex-start; /* Align items vertically */
+  min-height: 100vh;
 }
 
 .container {
   background-color: #F8F1F1;
-  width: 300px;
-  padding: 20px;
+  max-width: 400px; /* Increase the width */
+  padding: 30px; /* Increase the padding */
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   margin-top: 30px;
@@ -35,22 +37,24 @@ body {
 
 .container h2 {
   text-align: center;
+  font-size: 24px; /* Increase the font size */
+  margin-bottom: 20px; /* Increase the margin-bottom */
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px; /* Increase the margin-bottom */
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 10px; /* Increase the margin-bottom */
 }
 
 .form-group input {
   width: 100%;
-  font-size: 18px;
+  font-size: 20px; /* Increase the font size */
   border-radius: 5px;
-  padding: 2px;
+  padding: 8px; /* Increase the padding */
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
@@ -59,7 +63,7 @@ body {
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
-  padding: 7px;
+  padding: 10px 16px; /* Increase the padding */
   border: none;
 }
 
@@ -124,11 +128,11 @@ body {
   background-color: gray;
   border: none;
   color: white;
-  padding: 5px 32px;
+  padding: 8px 32px; /* Increase the padding */
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 14px;
+  font-size: 18px; /* Increase the font size */
   margin: 4px 2px;
   cursor: pointer;
 }
