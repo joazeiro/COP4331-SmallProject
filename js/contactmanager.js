@@ -37,9 +37,11 @@ document.getElementById("searchButton").onclick = () => searchContact();
 function onDocumentLoad()
 {
 
-    CookieManager.read();
+    //CookieManager.read();
 
-    document.getElementById("username").innerHTML = `${CookieManager.firstName} ${CookieManager.lastName}`;
+    //document.getElementById("username").innerHTML = `${CookieManager.firstName} ${CookieManager.lastName}`;
+
+    addRow({firstName: "Rick", lastName: "Leinecker", email: "myemail@email.com", phone: "999-999-9999", linkedin: "www.google.com", Id: "1", dateCreated: "5/31/23"});
 
 }
 
@@ -182,7 +184,7 @@ function addRow(o)
 
     var idCell = myRow.insertCell(5);
 
-    idCell.innerHTML = o.ID;
+    idCell.innerHTML = o.Id;
 
     var dateCreatedCell = myRow.insertCell(6);
 
