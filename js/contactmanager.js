@@ -28,7 +28,7 @@ function onDocumentLoad() {
 
 function logout() {
     CookieManager.clear();
-    window.location.href = `${url}/login.html`;
+    window.location.href = `${url}/html/login.html`;
 }
 
 function addContact() {
@@ -115,7 +115,7 @@ function addRow(o) {
 
 function openEditModal(i) {
     const row = contactTable.getElementsByTagName("tr")[i];
-    const cells = row.getElementsByTagName("td"];
+    const cells = row.getElementsByTagName("td");
     document.getElementById("editFirstName").value = cells[0].innerHTML;
     document.getElementById("editLastName").value = cells[1].innerHTML;
     document.getElementById("editEmail").value = cells[2].innerHTML;
@@ -151,7 +151,7 @@ function editContact() {
 
 function openDeleteModal(i) {
     const row = contactTable.getElementsByTagName("tr")[i];
-    const cells = row.getElementsByTagName("td"];
+    const cells = row.getElementsByTagName("td");
     document.getElementById("deleteContactFirstName").innerHTML = cells[0].innerHTML;
     document.getElementById("deleteContactLastName").innerHTML = cells[1].innerHTML;
     document.getElementById("deleteContactEmail").innerHTML = cells[2].innerHTML;

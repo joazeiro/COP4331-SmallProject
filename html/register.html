@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login Page</title>
+  <title>Register Page</title>
+  <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-  <h1>Login</h1>
-  <form action="/api/sign_up.php">
-    <label for="registration_username">Username:</label>
-    <input type="text" id="registration_username">
-    <br><br>
-    <label for="registration_password">Password:</label>
-    <input type="password" id="registration_password">
-    <br><br>
-    <input type="submit" value="Submit">
-  </form>
-  <br>
-  <input type="button" onclick="location.href='/html/register.html';" value="">
+  <div class="logo">
+    <h1>CHECK MY CONTACTS</h1>
+  </div>
+  <div class="container">
+    <h2>Register</h2>
+    <form id="registrationForm" action="#" method="post">
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" name="firstName" placeholder="Jane" required>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" name="lastName" placeholder="Doe" required>
+      </div>
+      <div class="form-group">
+        <label for="login">Email:</label>
+        <input type="email" name="login" placeholder="you@yourdomain.com" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" name="password" placeholder="New password" required>
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Register">
+      </div>
+    </form>
+    <span id="registrationResult"></span>
+    <div class="link">
+      <a href="login.html">Login here</a>
+    </div>
+  </div>
+  <script type="module" src="js/register.js"></script>
 </body>
 </html>

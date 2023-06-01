@@ -32,7 +32,7 @@ function sendData() {
                 CookieManager.firstName = jsonObject.firstName;
                 CookieManager.lastName = jsonObject.lastName;
                 CookieManager.save();
-                window.location.href = "contactmanager.html";
+                window.location.href = "html/contactmanager.html";
             }
         };
         myRequest.send(loginFormDataJSON);
