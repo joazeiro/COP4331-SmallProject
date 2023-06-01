@@ -2,9 +2,9 @@
 
     $data = json_decode(file_get_contents('php://input'), true);
 
-    $db_username = "";
-    $db_pwd = "";
-    $db_name = "";
+    $db_username = "db";
+    $db_pwd = "KZXyk.N@JHc3gPu";
+    $db_name = "ContactDatabase";
 
     $db_connection = new mysqli("localhost", $db_username, $db_pwd, $db_name);
 

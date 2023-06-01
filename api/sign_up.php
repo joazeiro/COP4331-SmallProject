@@ -3,9 +3,9 @@
     // with that same email in our database
 
     $data = get_info();
-    $db_name = ''; // not created yet
-    $db_username = '';
-    $db_pwd = '';
+    $db_username = "db";
+    $db_pwd = "KZXyk.N@JHc3gPu";
+    $db_name = "ContactDatabase";
 
     $connect_db = new mysqli("localhost", $db_username, $db_pwd, $db_name);
 
