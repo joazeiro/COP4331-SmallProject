@@ -1,5 +1,3 @@
-import { url } from "./sharedVariables.js";
-
 export class CookieManager {
     static firstName = "";
     static lastName = "";

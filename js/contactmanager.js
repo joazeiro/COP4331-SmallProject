@@ -1,6 +1,3 @@
-import { url } from "./sharedVariables.js";
-import { CookieManager } from "./cookiemanager.js";
-
 const addContactForm = document.getElementById("addContactForm");
 const addContactResult = document.getElementById("addContactResult");
 const addContactModal = document.getElementById("addContactModal");

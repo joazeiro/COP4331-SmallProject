@@ -1,6 +1,3 @@
-import { url } from "./sharedVariables.js";
-import { CookieManager } from "./cookiemanager.js";
-
 const loginForm = document.getElementById("loginForm");
 
 document.addEventListener("DOMContentLoaded", onDocumentLoad, false);

@@ -1,12 +1,11 @@
-import { url } from "./sharedVariables.js";
-
 function sendData() {
+    const registrationForm = document.getElementById("registrationForm");
     const registrationFormData = new FormData(registrationForm);
     const registrationFormObject = {};
-    registrationFormData.forEach((value, key) => registrationFormObject[key] = value);
+    registrationFormData.forEach((value, key) => (registrationFormObject[key] = value));
     const registrationFormDataJSON = JSON.stringify(registrationFormObject);
     const myRequest = new XMLHttpRequest();
-    myRequest.open("POST", `${url}/api/sign_up.php`);
+    myRequest.open("POST", `${url}/api/register.php`);
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try {
@@ -17,7 +16,7 @@ function sendData() {
                 if (jsonObject.info == "Success") {
                     document.getElementById("registrationResult").innerHTML = "Registered successfully.";
                 } else {
-                    document.getElementById("registrationResult").innerHTML = `\"${registrationFormData["login"]}\" is already registered.`;
+                    document.getElementById("registrationResult").innerHTML = `"${registrationFormData.get("login")}" is already registered.`;
                 }
             } else {
                 document.getElementById("registrationResult").innerHTML = "Failed to register.";
@@ -32,7 +31,7 @@ function sendData() {
 
 const registrationForm = document.getElementById("registrationForm");
 
-registrationForm.addEventListener("submit", (event) => {
+registrationForm.addEventListener("submit", event => {
     event.preventDefault();
     sendData();
 });
