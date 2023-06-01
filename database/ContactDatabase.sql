@@ -7,11 +7,7 @@ use ContactDatabase;
 CREATE TABLE `ContactDatabase`.`users`
 (
     `ID` INT NOT NULL AUTO_INCREMENT ,
-    `DateCreated` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-    `DateLastLoggedIn` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-    `FirstName` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `LastName` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `Login` VARCHAR(50) NOT NULL DEFAULT '' ,
+    `Email` VARCHAR(50) NOT NULL DEFAULT '' ,
     `Password` VARCHAR(50) NOT NULL DEFAULT '' ,
     PRIMARY KEY (`ID`)
 ) ENGINE = InnoDB;
@@ -21,43 +17,45 @@ CREATE TABLE `ContactDatabase`.`contact`
     `ID` INT NOT NULL AUTO_INCREMENT ,
     `FirstName` VARCHAR(50) NOT NULL DEFAULT '' ,
     `LastName` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `PhoneNumber` VARCHAR(50) NOT NULL DEFAULT '' ,
     `Email` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `StreetAddress` VARCHAR(100) NOT NULL DEFAULT '' ,
-    `City` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `State` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `ZIP_Code` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `user_ID` INT NOT NULL DEFAULT '0' ,
+    `PhoneNumber` VARCHAR(50) NOT NULL DEFAULT '' ,
+    `Linkedin` VARCHAR(100) NOT NULL DEFAULT '' ,
     PRIMARY KEY (`ID`),
     FOREIGN KEY (`user_ID`) REFERENCES `ContactDatabase`.`users` (`ID`)
 ) ENGINE = InnoDB;
 
-insert into users (FirstName,LastName,Login,Password) VALUES ('Christopher','Dugazon','ChrisD','admin');
-insert into users (FirstName,LastName,Login,Password) VALUES ('Eduarda','Joazeiro','EduardaJ','admin');
-insert into users (FirstName,LastName,Login,Password) VALUES ('Berkay','Arslan','BerkayA','admin');
-insert into users (FirstName,LastName,Login,Password) VALUES ('Kandi','Brand','KandiB','admin');
+INSERT INTO `users` (`Email`, `Password`)
+VALUES
+    ('first1.last1@example.com', 'password1'),
+    ('first2.last2@example.com', 'password2'),
+    ('first3.last3@example.com', 'password3'),
+    ('first4.last4@example.com', 'password4'),
+    ('first5.last5@example.com', 'password5'),
+    ('first6.last6@example.com', 'password6'),
+    ('first7.last7@example.com', 'password7'),
+    ('first8.last8@example.com', 'password8'),
+    ('first9.last9@example.com', 'password9'),
+    ('first10.last10@example.com', 'password10'),
+    ('first11.last11@example.com', 'password11'),
+    ('first12.last12@example.com', 'password12'),
+    ('first13.last13@example.com', 'password13'),
+    ('first14.last14@example.com', 'password14'),
+    ('first15.last15@example.com', 'password15');
 
-insert into contact (FirstName,LastName,PhoneNumber,Email,StreetAddress,City,State,ZIP_Code,user_ID) VALUES 
-    ('Anna','Beach','8174689844','annabeach@aol.com','123 Naur Way','Alberta','Alabama','13577',1);
-insert into contact (FirstName,LastName,PhoneNumber,Email,StreetAddress,City,State,ZIP_Code,user_ID) VALUES 
-    ('Charles','Downs','3905832828','charlesdowns@deep.com','3498 North Court','Bourne','Colorado','32049',2);
-insert into contact (FirstName,LastName,PhoneNumber,Email,StreetAddress,City,State,ZIP_Code,user_ID) VALUES 
-    ('Earl','Fagin','1401330557','earlfagin@eep.com','4320 Smart Boulevard','Crooke','Delaware','34238',3);
-insert into contact (FirstName,LastName,PhoneNumber,Email,StreetAddress,City,State,ZIP_Code,user_ID) VALUES 
-    ('Gina','Hall','3032965761','ginahall@gmail.com','3208 Young Drive','Diode','Florida','85933',4);
-insert into contact (FirstName,LastName,PhoneNumber,Email,StreetAddress,City,State,ZIP_Code,user_ID) VALUES 
-    ('Ian','Jones','3429007682','ianjones@icloud.com','9321 East Park','Evermore','Georgia','57333',1);
-insert into contact (FirstName,LastName,PhoneNumber,Email,StreetAddress,City,State,ZIP_Code,user_ID) VALUES 
-    ('Kelly','Leedy','8391904618','kellyleedy@kneed.com','3259 Faraday Way','Fuendo','Hawaii','95933',2);
-insert into contact (FirstName,LastName,PhoneNumber,Email,StreetAddress,City,State,ZIP_Code,user_ID) VALUES 
-    ('Mary','Nore','3690240962','marynore@mazed.com','9498 West Park','Guesue','Idaho','59324',3);
-insert into contact (FirstName,LastName,PhoneNumber,Email,StreetAddress,City,State,ZIP_Code,user_ID) VALUES 
-    ('Opal','Parrish','3727036438','opalparrish@orca.com','8532 Fern Avenue','Horseshoe','Kansas','53922',4);
-insert into contact (FirstName,LastName,PhoneNumber,Email,StreetAddress,City,State,ZIP_Code,user_ID) VALUES 
-    ('Quisha','Rice','7053754609','quisharice@queen.com','3475 South Street','Ink','Louisiana','69434',1);
-insert into contact (FirstName,LastName,PhoneNumber,Email,StreetAddress,City,State,ZIP_Code,user_ID) VALUES 
-    ('Sara','Tariff','7008229607','saratariff@south.com','3948 Lookout Court','Joyce','Maine','53929',2);
-insert into contact (FirstName,LastName,PhoneNumber,Email,StreetAddress,City,State,ZIP_Code,user_ID) VALUES 
-    ('Uganda','Veron','4489864718','ugandaveron@url.com','8474 Meet Boulevard','Kandi','North Dakota','58343',3);
-insert into contact (FirstName,LastName,PhoneNumber,Email,StreetAddress,City,State,ZIP_Code,user_ID) VALUES 
-    ('Will','Xerox','2690420963','willxerox@windows.com','9793 Manhattan Road','Lewser','Ohio','59343',4);
+INSERT INTO `contact` (`FirstName`, `LastName`, `PhoneNumber`, `Email`, `Linkedin`, `user_ID`)
+VALUES
+    ('First1', 'Last1', '000000001', 'first1.last1@example.com', 'https://www.linkedin.com/in/first1last1', 1),
+    ('First2', 'Last2', '000000002', 'first2.last2@example.com', 'https://www.linkedin.com/in/first2last2', 2),
+    ('First3', 'Last3', '000000003', 'first3.last3@example.com', 'https://www.linkedin.com/in/first3last3', 3),
+    ('First4', 'Last4', '000000004', 'first4.last4@example.com', 'https://www.linkedin.com/in/first4last4', 4),
+    ('First5', 'Last5', '000000005', 'first5.last5@example.com', 'https://www.linkedin.com/in/first5last5', 5),
+    ('First6', 'Last6', '000000006', 'first6.last6@example.com', 'https://www.linkedin.com/in/first6last6', 6),
+    ('First7', 'Last7', '000000007', 'first7.last7@example.com', 'https://www.linkedin.com/in/first7last7', 7),
+    ('First8', 'Last8', '000000008', 'first8.last8@example.com', 'https://www.linkedin.com/in/first8last8', 8),
+    ('First9', 'Last9', '000000009', 'first9.last9@example.com', 'https://www.linkedin.com/in/first9last9', 9),
+    ('First10', 'Last10', '000000010', 'first10.last10@example.com', 'https://www.linkedin.com/in/first10last10', 10),
+    ('First11', 'Last11', '0000000011', 'first11.last11@example.com', 'https://www.linkedin.com/in/first11last11', 11),
+    ('First12', 'Last12', '0000000012', 'first12.last12@example.com', 'https://www.linkedin.com/in/first12last12', 12),
+    ('First13', 'Last13', '0000000013', 'first13.last13@example.com', 'https://www.linkedin.com/in/first13last13', 13),
+    ('First14', 'Last14', '0000000014', 'first14.last14@example.com', 'https://www.linkedin.com/in/first14last14', 14),
+    ('First15', 'Last15', '0000000015', 'first15.last15@example.com', 'https://www.linkedin.com/in/first15last15', 15),
