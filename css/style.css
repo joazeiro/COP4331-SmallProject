@@ -1,35 +1,34 @@
-/* Reset default margin and padding */
 body, h1, h2, h3, h4, h5, h6, p, ul, ol, li {
   margin: 0;
   padding: 0;
   font-size: 100%;
   font-weight: normal;
+  font-family: 'Roboto', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 body {
-  font-family: Arial, sans-serif;
   background-color: #025464;
 }
 
 .logo {
-  font-family: 'Roboto', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   color: #F8F1F1;
-  font-size: 48px; /* Increase the font size */
+  font-size: 48px;
   text-align: center;
-  margin-top: 20px; /* Reduce the margin-top */
+  margin-top: 20px;
+  font-weight: bold;
 }
 
 .center-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Align items vertically */
+  align-items: flex-start;
   min-height: 100vh;
 }
 
 .container {
   background-color: #F8F1F1;
-  max-width: 400px; /* Increase the width */
-  padding: 30px; /* Increase the padding */
+  max-width: 400px;
+  padding: 30px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   margin-top: 30px;
@@ -37,24 +36,24 @@ body {
 
 .container h2 {
   text-align: center;
-  font-size: 24px; /* Increase the font size */
-  margin-bottom: 20px; /* Increase the margin-bottom */
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .form-group {
-  margin-bottom: 20px; /* Increase the margin-bottom */
+  margin-bottom: 20px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 10px; /* Increase the margin-bottom */
+  margin-bottom: 10px;
 }
 
 .form-group input {
   width: 100%;
-  font-size: 20px; /* Increase the font size */
+  font-size: 20px;
   border-radius: 5px;
-  padding: 8px; /* Increase the padding */
+  padding: 8px;
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
 
@@ -63,7 +62,7 @@ body {
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
-  padding: 10px 16px; /* Increase the padding */
+  padding: 10px 16px;
   border: none;
 }
 
@@ -128,11 +127,11 @@ body {
   background-color: gray;
   border: none;
   color: white;
-  padding: 8px 32px; /* Increase the padding */
+  padding: 8px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 18px; /* Increase the font size */
+  font-size: 18px;
   margin: 4px 2px;
   cursor: pointer;
 }
