@@ -26,7 +26,7 @@ export class CookieManager {
         }
 
         if (this.userID < 0 && window.location.pathname !== "/html/login.html") {
-            window.location.href = "/html/login.html";
+            window.location.href = "../html/login.html";
         }
     }
 

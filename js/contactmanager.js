@@ -1,26 +1,90 @@
-const addContactForm = document.getElementById("addContactForm");
-const addContactResult = document.getElementById("addContactResult");
-const addContactModal = document.getElementById("addContactModal");
-const editContactModal = document.getElementById("editContactModal");
-let editId = -1;
-const deleteContactModal = document.getElementById("deleteContactModal");
-const contactTable = document.getElementById("contactTable");
-
+import { CookieManager } from './cookiemanager.js';
+import { url } from './sharedVariables.js';
 document.addEventListener("DOMContentLoaded", onDocumentLoad, false);
 
-document.getElementById("logoutButton").onclick = () => logout();
-document.getElementById("openAddModalButton").onclick = () => addContactModal.style.display = "block";
-document.getElementById("addContactClose").onclick = () => addContactModal.style.display = "none";
-document.getElementById("editContactClose").onclick = () => editContactModal.style.display = "none";
-document.getElementById("deleteContactClose").onclick = () => deleteContactModal.style.display = "none";
-document.getElementById("deleteCancelButton").onclick = () => deleteContactModal.style.display = "none";
-document.getElementById("deleteConfirmButton").onclick = () => deleteContact();
-document.getElementById("searchButton").onclick = () => searchContact();
+var addContactForm = null;
+var addContactModal = null;
+var addContactResult = null;
+var editContactModal = null;
+var editContactForm = null;
+var deleteContactModal = null;
+var contactTable = null;
+var logoutButton = null;
+var openAddModalButton = null;
+var addContactClose = null;
+var editContactClose = null;
+var deleteContactClose = null;
+var deleteCancelButton = null;
+var deleteConfirmButton = null;
+var searchButton = null;
+let editId = -1;
 
 function onDocumentLoad() {
     // CookieManager.read();
     // document.getElementById("username").innerHTML = `${CookieManager.firstName} ${CookieManager.lastName}`;
-    addRow({ firstName: "Rick", lastName: "Leinecker", email: "myemail@email.com", phone: "999-999-9999", linkedin: "www.google.com", Id: "1", dateCreated: "5/31/23" });
+    addContactForm = document.getElementById("addContactForm");
+    editContactForm = document.getElementById("editContactForm"); 
+    addContactResult = document.getElementById("addContactResult");
+    addContactModal = document.getElementById("addContactModal");
+    editContactModal = document.getElementById("editContactModal");
+    deleteContactModal = document.getElementById("deleteContactModal");
+    contactTable = document.getElementById("contactTable");
+
+    if(editContactForm != null){
+        editContactForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            editContact();
+        });
+    }
+
+    if(addContactForm != null){
+        addContactForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            addContact();
+        });
+    }
+
+    logoutButton = document.getElementById("logoutButton");
+    if(logoutButton != null){
+        logoutButton.onclick = () => logout();
+    }
+
+    openAddModalButton = document.getElementById("openAddModalButton")
+    if(openAddModalButton != null){
+        openAddModalButton.onclick = () => addContactModal.style.display = "block";
+    }
+
+    addContactClose = document.getElementById("addContactClose")
+    if(addContactClose != null){
+        addContactClose.onclick = () => addContactModal.style.display = "none";
+    }
+    
+    editContactClose = document.getElementById("editContactClose")
+    if(editContactClose != null){
+        editContactClose.onclick = () => editContactModal.style.display = "none";
+    }
+
+    deleteContactClose = document.getElementById("deleteContactClose");
+    if(deleteContactClose != null){
+        deleteContactClose.onclick = () => deleteContactModal.style.display = "none";
+    }
+
+    var deleteCancelButton = document.getElementById("deleteCancelButton");
+    if(deleteCancelButton != null){
+        deleteCancelButton.onclick = () => deleteContactModal.style.display = "none";
+    }
+    
+    deleteConfirmButton = document.getElementById("deleteConfirmButton");
+    if(deleteConfirmButton != null){
+        deleteConfirmButton.onclick = () => deleteContact();
+    }
+
+    searchButton = document.getElementById("searchButton")
+    if(searchButton != null){
+        searchButton.onclick = () => searchContact();
+    }
+    
+    // addRow({ firstName: "Rick", lastName: "Leinecker", email: "myemail@email.com", phone: "999-999-9999", linkedin: "www.google.com", Id: "1", dateCreated: "5/31/23" });
 }
 
 function logout() {
@@ -35,7 +99,7 @@ function addContact() {
     addContactFormObject["user_ID"] = CookieManager.userID;
     const addContactFormDataJSON = JSON.stringify(addContactFormObject);
     const myRequest = new XMLHttpRequest();
-    myRequest.open("POST", `${url}/api/create_contact.php`, true);
+    myRequest.open("POST", `${url}/php/create_contact.php`, true);
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try {
@@ -56,7 +120,7 @@ function searchContact() {
     const tmp = { user_ID: CookieManager.userID, search_criteria: query };
     const jsonPayload = JSON.stringify(tmp);
     const myRequest = new XMLHttpRequest();
-    myRequest.open("POST", `${url}/api/search_contact.php`);
+    myRequest.open("POST", `${url}/php/search_contact.php`);
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try {
@@ -162,9 +226,8 @@ function openDeleteModal(i) {
 function deleteContact() {
     const deleteObject = { id: document.getElementById("deleteContactId").innerHTML, user_ID: CookieManager.userID };
     const deleteObjectJSON = JSON.stringify(deleteObject);
-    let url = "";
     const myRequest = new XMLHttpRequest();
-    myRequest.open("POST", `${url}/api/delete_contact.php`, true);
+    myRequest.open("POST", `${url}/php/delete_contact.php`, true);
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try {
@@ -178,14 +241,4 @@ function deleteContact() {
     } catch (error) {
         deleteContactResult.innerHTML = error.message;
     }
-}
-
-editContactForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    editContact();
-});
-
-addContactForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    addContact();
-});
+};

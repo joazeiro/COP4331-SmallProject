@@ -1,9 +1,26 @@
-const loginForm = document.getElementById("loginForm");
+import { CookieManager } from './cookiemanager.js';
+import { url } from './sharedVariables.js';
+
+// const {CookieManager} = require("./cookiemanager.js");
+// const {url} = require('./sharedvariables.js'); 
+
+var loginForm = null;
 
 document.addEventListener("DOMContentLoaded", onDocumentLoad, false);
 
 function onDocumentLoad() {
-    CookieManager.read();
+    //CookieManager.read();
+
+    loginForm = document.getElementById("loginForm");
+
+    if(loginForm != null){
+        loginForm.addEventListener("submit", (event) => {
+            CookieManager.clear();
+            event.preventDefault();
+            sendData();
+        });
+    }
+
 }
 
 function sendData() {
@@ -12,7 +29,7 @@ function sendData() {
     loginFormData.forEach((value, key) => loginFormObject[key] = value);
     const loginFormDataJSON = JSON.stringify(loginFormObject);
     const myRequest = new XMLHttpRequest();
-    myRequest.open("POST", `${url}/api/login.php`);
+    myRequest.open("POST", `${url}/php/login.php`);
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try {
@@ -29,7 +46,7 @@ function sendData() {
                 CookieManager.firstName = jsonObject.firstName;
                 CookieManager.lastName = jsonObject.lastName;
                 CookieManager.save();
-                window.location.href = "html/contactmanager.html";
+                window.location.href = "../html/contactmanager.html";
             }
         };
         myRequest.send(loginFormDataJSON);
@@ -38,8 +55,4 @@ function sendData() {
     }
 }
 
-loginForm.addEventListener("submit", (event) => {
-    CookieManager.clear();
-    event.preventDefault();
-    sendData();
-});
+
