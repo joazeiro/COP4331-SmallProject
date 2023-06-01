@@ -12,7 +12,7 @@ if ($db_connection->connect_error) {
     header('Content-type: application/json');
     echo $message;
 } else {
-    $sql = "DELETE FROM contact WHERE (`ID` = " . $data["ID"] . " AND `user_ID` = " . $data["user_ID"] . ");";
+    $sql = "DELETE FROM contact WHERE (`ID` = " . $data["ID"] . ");";
     $result = $db_connection->query($sql);
 
     if ($result === true) {

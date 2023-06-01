@@ -20,7 +20,7 @@ function sendData() {
 
     try {
         myRequest.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
+            if (this.readyState === 4 && this.status === 200) {
                 const jsonObject = JSON.parse(myRequest.responseText);
                 CookieManager.userID = jsonObject.id;
 
@@ -37,7 +37,7 @@ function sendData() {
         };
         myRequest.send(loginFormDataJSON);
     } catch (err) {
-        document.getElementById("loginFailedSpan").innerHTML = err.message;
+        document.getElementById("loginStatus").innerHTML = err.message;
     }
 }
 

@@ -2,26 +2,28 @@
 
 /* create database ContactDatabase; */
 
-use ContactDatabase;
+USE ContactDatabase;
 
-CREATE TABLE `ContactDatabase`.`users`
+CREATE TABLE IF NOT EXISTS `users`
 (
-    `ID` INT NOT NULL AUTO_INCREMENT ,
-    `Email` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `Password` VARCHAR(50) NOT NULL DEFAULT '' ,
+    `ID` INT NOT NULL AUTO_INCREMENT,
+    `Email` VARCHAR(50) NOT NULL DEFAULT '',
+    `Password` VARCHAR(50) NOT NULL DEFAULT '',
+    `DateLastLoggedIn` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`ID`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE `ContactDatabase`.`contact`
+CREATE TABLE IF NOT EXISTS `contact`
 (
-    `ID` INT NOT NULL AUTO_INCREMENT ,
-    `FirstName` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `LastName` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `Email` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `PhoneNumber` VARCHAR(50) NOT NULL DEFAULT '' ,
-    `Linkedin` VARCHAR(100) NOT NULL DEFAULT '' ,
+    `ID` INT NOT NULL AUTO_INCREMENT,
+    `FirstName` VARCHAR(50) NOT NULL DEFAULT '',
+    `LastName` VARCHAR(50) NOT NULL DEFAULT '',
+    `Email` VARCHAR(50) NOT NULL DEFAULT '',
+    `PhoneNumber` VARCHAR(50) NOT NULL DEFAULT '',
+    `Linkedin` VARCHAR(100) NOT NULL DEFAULT '',
+    `user_ID` INT,
     PRIMARY KEY (`ID`),
-    FOREIGN KEY (`user_ID`) REFERENCES `ContactDatabase`.`users` (`ID`)
+    FOREIGN KEY (`user_ID`) REFERENCES `users` (`ID`)
 ) ENGINE = InnoDB;
 
 INSERT INTO `users` (`Email`, `Password`)
@@ -58,4 +60,4 @@ VALUES
     ('First12', 'Last12', '0000000012', 'first12.last12@example.com', 'https://www.linkedin.com/in/first12last12', 12),
     ('First13', 'Last13', '0000000013', 'first13.last13@example.com', 'https://www.linkedin.com/in/first13last13', 13),
     ('First14', 'Last14', '0000000014', 'first14.last14@example.com', 'https://www.linkedin.com/in/first14last14', 14),
-    ('First15', 'Last15', '0000000015', 'first15.last15@example.com', 'https://www.linkedin.com/in/first15last15', 15),
+    ('First15', 'Last15', '0000000015', 'first15.last15@example.com', 'https://www.linkedin.com/in/first15last15', 15);
