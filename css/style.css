@@ -3,7 +3,7 @@ body, h1, h2, h3, h4, h5, h6, p, ul, ol, li {
   padding: 0;
   font-size: 100%;
   font-weight: normal;
-  font-family: 'Roboto', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: 'Roboto', 'Impact', 'Haettenschweiler', 'Arial Narrow Bold', sans-serif;
 }
 
 body {
@@ -21,8 +21,8 @@ body {
 .center-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
@@ -31,7 +31,6 @@ body {
   padding: 30px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.3);
-  margin-top: 30px;
 }
 
 .container h2 {
@@ -137,9 +136,12 @@ body {
   cursor: pointer;
 }
 
+.myTable {
+  border: 1px solid;
+} 
+
 .myTable table,
 .myTable th,
 .myTable td {
   border: 1px solid;
 }
-
