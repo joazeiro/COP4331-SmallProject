@@ -3,7 +3,7 @@
 <head>
   <title>Contacts</title>
 
-<!-- style.css Start -->
+<!-- CSS Start -->
   <style>
     body
     {
@@ -11,18 +11,17 @@
       background-color: #025464;
     }
 
-
     h1
     {
-      text-align: center;
       color: #F8F1F1;
+      text-align: center;
       font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-      font-size: 40px;
       margin-top: 20px;
+      font-size: 40px;
     }
 
 
-    #loginOutDiv
+    #logInOut
     {
       text-align: center;
       margin-top: 20px;
@@ -39,15 +38,15 @@
 
     #logoutButton
     {
-      background-color: #E57C23;
       color: #F8F1F1;
+      background-color: #E57C23;
       border: none;
       border-radius: 5px;
       padding: 7px;
-      cursor: pointer;
       position: absolute;
-      top: 17px;
+      cursor: pointer;
       left: 17px;
+      top: 17px;
     }
 
 
@@ -59,39 +58,40 @@
 
     #contactTable
     {
-      margin: 0 auto;
-      border-collapse: collapse;
-      width: 90%;
       background-color: #F8F1F1;
+      margin: 0 auto;
+      width: 90%;
+      border-collapse: collapse;
       margin-bottom: 20px;
     }
 
 
     #contactTable th, #contactTable td
     {
-      border: 1px solid #999;
+      border: 1px solid #E8AA42;
       padding: 8px;
       text-align: left;
     }
 
+
     #contactTable th
     {
-      background-color: #025464;
       color: #F8F1F1;
+      background-color: #025464;
     }
 
 
-    #searchContactFounded
+    #searchContactResult
     {
+      color: #F8F1F1;
       display: block;
       text-align: center;
       margin-bottom: 20px;
       font-weight: bold;
-      color: #F8F1F1;
     }
 
 
-    #contactDiv
+    #contactSpace
     {
       text-align: center;
       margin-bottom: 20px;
@@ -100,25 +100,25 @@
 
     #searchText
     {
+      border: 1px solid rgba(0, 0, 0, 0.4);
       font-size: 18px;
       border-radius: 5px;
       padding: 5px;
-      border: 1px solid rgba(0, 0, 0, 0.3);
       text-align: center;
     }
 
 
     #searchButton
     {
-      background-color: #E57C23;
       color: #F8F1F1;
+      background-color: #E57C23;
       border: none;
       border-radius: 5px;
       padding: 7px;
       cursor: pointer;
     }
 
-
+  
     #searchButton:hover
     {
       background-color: #E8AA42;
@@ -127,15 +127,15 @@
 
     #openAddModalButton
     {
-      background-color: #E57C23;
       color: #F8F1F1;
+      background-color: #E57C23;
       border: none;
       border-radius: 5px;
       padding: 7px;
       cursor: pointer;
     }
 
-  
+
     #openAddModalButton:hover
     {
       background-color: #E8AA42;
@@ -144,35 +144,35 @@
 
     .modal
     {
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
       display: none;
       position: fixed;
       z-index: 1;
       padding-top: 100px;
       left: 0;
       top: 0;
-      width: 100%;
       height: 100%;
+      width: 100%;
       overflow: auto;
-      background-color: rgb(0, 0, 0);
-      background-color: rgba(0, 0, 0, 0.4);
     }
 
 
     .container
     {
-      background-color: #F8F1F1;
+      background-color: #FFD700;
+      border: 1px solid #ffffff;
       margin: 0 auto;
       padding: 20px;
-      border: 1px solid #999;
-      width: 300px; /* Adjusted width */
+      width: 300px;
       border-radius: 5px;
-      text-align: center; /* Added */
+      text-align: center;
     }
 
 
     .close
     {
-      color: #aaa;
+      color: #000000;
       float: right;
       font-size: 28px;
       font-weight: bold;
@@ -182,7 +182,7 @@
 
     .close:hover, .close:focus
     {
-      color: black;
+      color: rgb(99, 99, 99);
       text-decoration: none;
       cursor: pointer;
     }
@@ -190,8 +190,8 @@
 
     .addContactButton
     {
-      background-color: #E57C23;
       color: #F8F1F1;
+      background-color: #E57C23;
       border: none;
       border-radius: 5px;
       padding: 7px;
@@ -216,34 +216,56 @@
       display: block;
       margin: 10px auto;
       text-align: center;
-      width: 80%;
     }
 
 
-    .modal input[type="date"]
+    .delete-ContactButton
     {
-      width: 60%;
+      color: #F8F1F1;
+      background-color: #E57C23;
+      border: none;
+      border-radius: 5px;
+      padding: 7px;
+      cursor: pointer;
     }
 
+
+    .delete-ContactButton:hover
+    {
+      background-color: #E86161;
+    }
+
+
+    .linkedin-link
+    {
+      color: #006ba1;
+      text-decoration: none;
+    }
+
+
+    .modal .container
+    {
+      width: 200px;
+    }
   </style>
 </head>
-<!-- style.css End -->
+<!-- CSS End -->
 
 
 
-<!-- contactmanager.html Start -->
+<!-- HTML Start -->
 <body>
   <h1>Contacts</h1>
-
-  <div id="loginOutDiv">
-    <span id="username">Welcome!</span>
+  <div id="logInOut">
+    <span id="username">Home Page</span>
     <button id="logoutButton">Logout</button>
   </div>
 
-  <div id="contactDiv">
-    <input type="text" id="searchText" placeholder="Search by name, email, Linkedin or date created">
+
+  <div id="contactSpace">
+    <input type="text" id="searchText" placeholder="Search for contact...">
     <button id="searchButton">Search</button>
-    <p id="searchContactFounded"></p>
+    <p id="searchContactResult"></p>
     <table id="contactTable">
       <thead>
         <tr>
@@ -252,35 +274,30 @@
           <th>Phone</th>
           <th>Linkedin</th>
           <th>Date Created</th>
+          <th>Delete</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>Jane Doe</td>
-          <td>jane_doe@domain.com</td>
-          <td>123-456-7890</td>
-          <td>linkedin.com/janedoe</td>
-          <td>2023-06-06</td>
-        </tr>
-      </tbody>
+      <tbody></tbody>
     </table>
     <button id="openAddModalButton">Add Contact</button>
   </div>
+
 
   <div id="addModal" class="modal">
     <div class="container">
       <span class="close">&times;</span>
       <h2>Add Contact</h2>
       <form id="addContactForm">
-        <input type="text" id="name" name="name" placeholder="Name" required>
-        <input type="email" id="email" name="email" placeholder="Email" required>
-        <input type="tel" id="phone" name="phone" placeholder="Phone" required>
-        <input type="text" id="linkedin" name="linkedin" placeholder="Linkedin" required>
+        <input type="text" id="name" name="name" placeholder="Full Name" required>
+        <input type="email" id="email" name="email" placeholder="Email Address" required>
+        <input type="tel" id="phone" name="phone" placeholder="Phone #" required>
+        <input type="text" id="linkedin" name="linkedin" placeholder="Linkedin Page" required>
         <input type="date" id="dateCreated" name="dateCreated" required>
         <button class="addContactButton">Add</button>
       </form>
     </div>
   </div>
+
 
   <script>
     var modal = document.getElementById("addModal");
@@ -292,12 +309,12 @@
       modal.style.display = "block";
     };
 
-    span.onclick = function()
+    span.onclick = function ()
     {
       modal.style.display = "none";
     };
 
-    window.onclick = function(event)
+    window.onclick = function (event)
     {
       if(event.target == modal)
       {
@@ -305,8 +322,8 @@
       }
     };
 
-    var addContactForm = document.getElementById("addContactForm");
 
+    var addContactForm = document.getElementById("addContactForm");
     addContactForm.addEventListener("submit", function(event)
     {
       event.preventDefault();
@@ -322,13 +339,32 @@
       var phoneCell = newRow.insertCell(2);
       var linkedinCell = newRow.insertCell(3);
       var dateCreatedCell = newRow.insertCell(4);
+      var deleteCell = newRow.insertCell(5);
       nameCell.innerHTML = name;
       emailCell.innerHTML = email;
       phoneCell.innerHTML = phone;
-      linkedinCell.innerHTML = linkedin;
+      linkedinCell.innerHTML = '<a href="' + linkedin + '" class="linkedin-link" target="_blank">' + linkedin + '</a>';
       dateCreatedCell.innerHTML = dateCreated;
+      deleteCell.innerHTML = '<button class="delete-ContactButton">Delete</button>';
       modal.style.display = "none";
       addContactForm.reset();
+
+      var deleteButtons = document.getElementsByClassName("delete-ContactButton");
+      for(var i = 0; i < deleteButtons.length; i++)
+      {
+        deleteButtons[i].addEventListener("click", function()
+        {
+          var row = this.parentNode.parentNode;
+          row.parentNode.removeChild(row);
+        });
+      }
+    });
+
+
+    var logoutButton = document.getElementById("logoutButton");
+    logoutButton.addEventListener("click", function()
+    {
+      window.location.href = "login.html";
     });
 
 
@@ -357,20 +393,12 @@
         }
       }
 
-      var searchContactFounded = document.getElementById("searchContactFounded");
 
-      if(searchResultCount > 0)
-      {
-        searchContactFounded.innerText = "Found " + searchResultCount + " contacts";
-      }
-      else
-      {
-        searchContactFounded.innerText = "No contacts found";
-      }
+      var searchContactResult = document.getElementById("searchContactResult");
+      searchContactResult.innerText = "Found " + searchResultCount + " contacts matching the search criteria.";
     });
-
   </script>
 
 </body>
-<!-- contactmanager.html End -->
+<!-- HTML End -->
 </html>
