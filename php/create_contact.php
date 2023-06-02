@@ -14,14 +14,14 @@ if ($db_connection->connect_error) {
     echo $message;
 } else {
     $sql = sprintf(
-        "INSERT INTO contact (FirstName, LastName, PhoneNumber, Email, Linkedin, user_ID) 
+        "INSERT INTO contact (FirstName, LastName, PhoneNumber, Email, Linkedin, User_ID) 
          VALUES ('%s', '%s', '%s', '%s', '%s', %d);",
         htmlspecialchars($data["FirstName"]),
         htmlspecialchars($data["LastName"]),
         htmlspecialchars($data["PhoneNumber"]),
         htmlspecialchars($data["Email"]),
         htmlspecialchars($data["Linkedin"]),
-        $data["user_ID"]
+        $data["User_ID"]
     );
 
     if ($db_connection->query($sql) === TRUE) {

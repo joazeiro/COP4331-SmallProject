@@ -14,9 +14,9 @@ $connect_db = new mysqli("localhost", $db_username, $db_pwd, $db_name);
 // check if connection to the database was successful
 if (!$connect_db->connect_error) {
     // check if user exists in the database
-    $email = $data["email"];
-    $password = $data["password"];
-    $query_user = "SELECT ID, FirstName, LastName FROM users WHERE Email='" . htmlspecialchars($data["email"]) . "' AND Password='" . htmlspecialchars($data["password"]) . "';";
+    $email = $data["Email"];
+    $password = $data["Password"];
+    $query_user = "SELECT ID, FirstName, LastName FROM users WHERE Email='" . htmlspecialchars($data["Email"]) . "' AND Password='" . htmlspecialchars($data["Password"]) . "';";
     $query_result = $connect_db->query($query_user);
 
     if ($query_result && $query_result->num_rows > 0) {
