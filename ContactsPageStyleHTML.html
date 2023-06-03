@@ -3,7 +3,7 @@
 <head>
   <title>Contacts</title>
 
-<!-- CSS Start -->
+<!-- style.css Start -->
   <style>
     body
     {
@@ -249,12 +249,13 @@
     }
   </style>
 </head>
-<!-- CSS End -->
+<!-- style.css End -->
 
 
 
-<!-- HTML Start -->
+<!-- contactmanager.html Start -->
 <body>
+
   <h1>Contacts</h1>
   <div id="logInOut">
     <span id="username">Home Page</span>
@@ -298,29 +299,31 @@
     </div>
   </div>
 
-
   <script>
+
     var modal = document.getElementById("addModal");
-    var btn = document.getElementById("openAddModalButton");
+    var mdlbutton = document.getElementById("openAddModalButton");
     var span = document.getElementsByClassName("close")[0];
+
 
     btn.onclick = function()
     {
-      modal.style.display = "block";
+      mdlbutton.style.display = "block";
     };
 
-    span.onclick = function ()
+    span.onclick = function()
     {
       modal.style.display = "none";
     };
 
-    window.onclick = function (event)
+    window.onclick = function(event)
     {
       if(event.target == modal)
       {
         modal.style.display = "none";
       }
     };
+
 
 
     var addContactForm = document.getElementById("addContactForm");
@@ -347,18 +350,24 @@
       dateCreatedCell.innerHTML = dateCreated;
       deleteCell.innerHTML = '<button class="delete-ContactButton">Delete</button>';
       modal.style.display = "none";
+
       addContactForm.reset();
 
       var deleteButtons = document.getElementsByClassName("delete-ContactButton");
+
       for(var i = 0; i < deleteButtons.length; i++)
       {
         deleteButtons[i].addEventListener("click", function()
         {
           var row = this.parentNode.parentNode;
           row.parentNode.removeChild(row);
+          savingSession();
         });
       }
+
+      savingSession();
     });
+
 
 
     var logoutButton = document.getElementById("logoutButton");
@@ -366,6 +375,7 @@
     {
       window.location.href = "login.html";
     });
+
 
 
     var searchButton = document.getElementById("searchButton");
@@ -393,12 +403,77 @@
         }
       }
 
-
       var searchContactResult = document.getElementById("searchContactResult");
       searchContactResult.innerText = "Found " + searchResultCount + " contacts matching the search criteria.";
     });
+
+
+
+    function savingSession()
+    {
+      var contactsTable = document.getElementById("contactTable");
+      var rows = contactsTable.getElementsByTagName("tbody")[0].rows;
+      var sessionData = [];
+
+      for(var i = 0; i < rows.length; i++)
+      {
+        var name = rows[i].cells[0].innerText;
+        var email = rows[i].cells[1].innerText;
+        var phone = rows[i].cells[2].innerText;
+        var linkedin = rows[i].cells[3].innerText;
+        var dateCreated = rows[i].cells[4].innerText;
+        sessionData.push({ name: name, email: email, phone: phone, linkedin: linkedin, dateCreated: dateCreated });
+      }
+
+      localStorage.setItem("sessionData", JSON.stringify(sessionData));
+    }
+
+
+
+    function loadingSession()
+    {
+      var sessionData = localStorage.getItem("sessionData");
+
+      if(sessionData)
+      {
+        var contactsTable = document.getElementById("contactTable");
+        var rows = JSON.parse(sessionData);
+
+        for(var i = 0; i < rows.length; i++)
+        {
+          var newRow = contactsTable.getElementsByTagName("tbody")[0].insertRow(i);
+          var nameCell = newRow.insertCell(0);
+          var emailCell = newRow.insertCell(1);
+          var phoneCell = newRow.insertCell(2);
+          var linkedinCell = newRow.insertCell(3);
+          var dateCreatedCell = newRow.insertCell(4);
+          var deleteCell = newRow.insertCell(5);
+          nameCell.innerHTML = rows[i].name;
+          emailCell.innerHTML = rows[i].email;
+          phoneCell.innerHTML = rows[i].phone;
+          linkedinCell.innerHTML = '<a href="' + rows[i].linkedin + '" class="linkedin-link" target="_blank">' + rows[i].linkedin + '</a>';
+          dateCreatedCell.innerHTML = rows[i].dateCreated;
+          deleteCell.innerHTML = '<button class="delete-ContactButton">Delete</button>';
+        }
+      }
+
+      var deleteButtons = document.getElementsByClassName("delete-ContactButton");
+      for(var i = 0; i < deleteButtons.length; i++)
+      {
+        deleteButtons[i].addEventListener("click", function()
+        {
+          var row = this.parentNode.parentNode;
+          row.parentNode.removeChild(row);
+          savingSession();
+        });
+      }
+    }
+
+    loadingSession();
+
   </script>
 
 </body>
-<!-- HTML End -->
+<!-- contactmanager.html End -->
+
 </html>
