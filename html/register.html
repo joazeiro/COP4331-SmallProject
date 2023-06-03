@@ -1,28 +1,52 @@
 <!DOCTYPE html>
-<html>
-
-    <head>
-        <title>Login Page</title>
-    </head>
-
-    <body>
-
-        <h1>Login</h1>
-        
-        <form action="/api/sign_up.php">
-            <label for="registration_username">Username:</label>
-            <input type="text" id="registration_username">
-            <br><br>
-            <label for="registeration_password">Password:</label>
-            <input type="text" id="registration_password">
-            <br><br>
-            <input type="submit" value="Submit">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Page</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1 class="logo">CONTACT MANAGER</h1>
+  </header>
+  <main>
+    <div class="center-container">
+      <div class="container">
+        <h2>Register</h2>
+        <form id="registrationForm" action="#" method="post">
+          <div class="form-group">
+            <label for="FirstName">First Name:</label>
+            <input type="text" name="FirstName" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label for="LastName">Last Name:</label>
+            <input type="text" name="LastName" placeholder="Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="Login">Email:</label>
+            <input type="email" name="Login" placeholder="User@YourDomain.com" required>
+          </div>
+          <div class="form-group">
+            <label for="Password">Password:</label>
+            <input type="password" name="Password" placeholder="Password" required>
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Register">
+          </div>
         </form>
-
-        <br>
-        
-        <input type="button" onclick="location.href='/html/register.html';" value="">
-
-    </body>
-
+        <div id="registrationResult"></div>
+        <div class="link">
+          <a href="../html/login.html">Login</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script type="module" src="../js/contactmanager.js" defer></script>
+  <script type="module" src="../js/cookiemanager.js" defer></script>
+  <script type="module" src="../js/login.js" defer></script>
+  <script type="module" src="../js/register.js" defer></script>
+  <script type="module" src="../js/sharedVariables.js" defer></script>
+</body>
 </html>

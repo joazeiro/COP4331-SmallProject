@@ -1,86 +1,60 @@
-import { url } from "./sharedVariables.js";
+import { CookieManager } from './cookiemanager.js';
+import { url } from './sharedVariables.js';
 
-import { CookieManager } from "./cookiemanager.js";
+// const {CookieManager} = require("./cookiemanager.js");
+// const {url} = require('./sharedvariables.js'); 
 
-const loginForm = document.getElementById("loginForm");
+var LoginForm = null;
 
-document.addEventListener("DOMContentLoaded", onDocumentLoad(), false);
+document.addEventListener("DOMContentLoaded", onDocumentLoad, false);
 
-function onDocumentLoad()
-{
+function onDocumentLoad() {
+    //CookieManager.read();
 
-    CookieManager.read();
+    LoginForm = document.getElementById("LoginForm");
+
+    if(LoginForm != null){
+        LoginForm.addEventListener("submit", (event) => {
+            CookieManager.clear();
+            event.preventDefault();
+            sendData();
+        });
+    }
 
 }
 
-function sendData(){
-
-    const loginFormData = new FormData(loginForm);
-
-    var loginFormObject = {};
-
-    loginFormData.forEach((value, key) => loginFormObject[key] = value);
-
-    var loginFormDataJSON = JSON.stringify(loginFormObject);
-
+function sendData() {
+    const LoginFormData = new FormData(LoginForm);
+    const LoginFormObject = {};
+    LoginFormData.forEach((value, key) => LoginFormObject[key] = value);
+    const LoginFormDataJSON = JSON.stringify(LoginFormObject);
     const myRequest = new XMLHttpRequest();
+    myRequest.open("POST", `${url}/php/login.php`);
+    myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-    myRequest.open("POST", `${url}/api/login.php`);
+    try {
+        myRequest.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                console.log(myRequest.responseText)
+                const jsonObject = JSON.parse(myRequest.responseText);
+                CookieManager.userID = jsonObject.ID;
 
-    myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8")
-
-    try{
-
-        myRequest.onreadystatechange = () =>
-        {
-
-            if(this.readystate == 4 && this.status == 200)
-            {
-
-                let jsonObject = JSON.parse(myRequest.responseText);
-
-                CookieManager.userID = jsonObject.id;
-
-                if(CookieManager.userID < 1){
-
-                    document.getElementById("loginStatus").innerHTML = "Incorrect username and password combination.";
-
+                if (CookieManager.userID < 1) {
+                    document.getElementById("LoginStatus").innerHTML = "Incorrect username and password combination.";
                     return;
-
                 }
 
-                CookieManager.firstName = jsonObject.firstName;
-
-                CookieManager.lastName = jsonObject.lastName;
-
+                CookieManager.FirstName = jsonObject.FirstName;
+                CookieManager.LastName = jsonObject.LastName;
                 CookieManager.save();
-
-                window.location.href = "contactmanager.html";
-        
-
+                window.location.href = "../html/contactmanager.html";
             }
+        };
 
-        }
-
-        myRequest.send(loginFormDataJSON);
-
+        myRequest.send(LoginFormDataJSON); // {"Login":"parkercmcleod@gmail.com","Password":"ffdafasdf"}
+    } catch (err) {
+        document.getElementById("LoginStatus").innerHTML = err.message;
     }
-    catch(err)
-    {
-
-        document.getElementById("loginFailedSpan").innerHTML = err.message;
-
-    }
-
 }
 
-loginForm.addEventListener("submit", (event) =>
-{
 
-    CookieManager.clear();
-
-    event.preventDefault();
-
-    sendData();
-
-});

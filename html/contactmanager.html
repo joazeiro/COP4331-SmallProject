@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Contacts</title>
+
+<!-- style.css Start -->
+  <style>
+    body
+    {
+      font-family: Arial, sans-serif;
+      background-color: #025464;
+    }
+
+    h1
+    {
+      color: #F8F1F1;
+      text-align: center;
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+      margin-top: 20px;
+      font-size: 40px;
+    }
+
+
+    #logInOut
+    {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+
+    #username
+    {
+      color: #F8F1F1;
+      font-size: 20px;
+    }
+
+
+    #logoutButton
+    {
+      color: #F8F1F1;
+      background-color: #E57C23;
+      border: none;
+      border-radius: 5px;
+      padding: 7px;
+      position: absolute;
+      cursor: pointer;
+      left: 17px;
+      top: 17px;
+    }
+
+
+    #logoutButton:hover
+    {
+      background-color: #E8AA42;
+    }
+
+
+    #contactTable
+    {
+      background-color: #F8F1F1;
+      margin: 0 auto;
+      width: 90%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+
+    #contactTable th, #contactTable td
+    {
+      border: 1px solid #E8AA42;
+      padding: 8px;
+      text-align: left;
+    }
+
+
+    #contactTable th
+    {
+      color: #F8F1F1;
+      background-color: #025464;
+    }
+
+
+    #searchContactResult
+    {
+      color: #F8F1F1;
+      display: block;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+
+    #contactSpace
+    {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+
+    #searchText
+    {
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      font-size: 18px;
+      border-radius: 5px;
+      padding: 5px;
+      text-align: center;
+    }
+
+
+    #searchButton
+    {
+      color: #F8F1F1;
+      background-color: #E57C23;
+      border: none;
+      border-radius: 5px;
+      padding: 7px;
+      cursor: pointer;
+    }
+
+  
+    #searchButton:hover
+    {
+      background-color: #E8AA42;
+    }
+
+
+    #openAddModalButton
+    {
+      color: #F8F1F1;
+      background-color: #E57C23;
+      border: none;
+      border-radius: 5px;
+      padding: 7px;
+      cursor: pointer;
+    }
+
+
+    #openAddModalButton:hover
+    {
+      background-color: #E8AA42;
+    }
+
+
+    .modal
+    {
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      overflow: auto;
+    }
+
+
+    .container
+    {
+      background-color: #FFD700;
+      border: 1px solid #ffffff;
+      margin: 0 auto;
+      padding: 20px;
+      width: 300px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+
+    .close
+    {
+      color: #000000;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+
+    .close:hover, .close:focus
+    {
+      color: rgb(99, 99, 99);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+    .addContactButton
+    {
+      color: #F8F1F1;
+      background-color: #E57C23;
+      border: none;
+      border-radius: 5px;
+      padding: 7px;
+      cursor: pointer;
+    }
+
+
+    .addContactButton:hover
+    {
+      background-color: #E8AA42;
+    }
+
+
+    .modal label
+    {
+      display: none;
+    }
+
+
+    .modal input
+    {
+      display: block;
+      margin: 10px auto;
+      text-align: center;
+    }
+
+
+    .delete-ContactButton
+    {
+      color: #F8F1F1;
+      background-color: #E57C23;
+      border: none;
+      border-radius: 5px;
+      padding: 7px;
+      cursor: pointer;
+    }
+
+
+    .delete-ContactButton:hover
+    {
+      background-color: #E86161;
+    }
+
+
+    .linkedin-link
+    {
+      color: #006ba1;
+      text-decoration: none;
+    }
+
+
+    .modal .container
+    {
+      width: 200px;
+    }
+  </style>
+<!-- style.css End -->
+
+
+
+<!-- contactmanager.html Start -->
+  </head>
+  <body>
+
+  <h1>Contacts</h1>
+  <div id="logInOut">
+    <span id="username">Home Page</span>
+    <button id="logoutButton">Logout</button>
+  </div>
+
+
+  <div id="contactSpace">
+    <input type="text" id="searchText" placeholder="Search for contact...">
+    <button id="searchButton">Search</button>
+    <p id="searchContactResult"></p>
+    <table id="contactTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Linkedin</th>
+          <th>Date Created</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <button id="openAddModalButton">Add Contact</button>
+  </div>
+
+
+  <div id="addModal" class="modal">
+    <div class="container">
+      <span class="close">&times;</span>
+      <h2>Add Contact</h2>
+      <form id="addContactForm">
+        <input type="text" id="name" name="name" placeholder="Full Name" required>
+        <input type="email" id="email" name="email" placeholder="Email Address" required>
+        <input type="tel" id="phone" name="phone" placeholder="Phone #" required>
+        <input type="text" id="linkedin" name="linkedin" placeholder="Linkedin Page" required>
+        <input type="date" id="dateCreated" name="dateCreated" required>
+        <button class="addContactButton">Add</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+
+    var modal = document.getElementById("addModal");
+    var mdlbutton = document.getElementById("openAddModalButton");
+    var span = document.getElementsByClassName("close")[0];
+
+    mdlbutton.onclick = function()
+    {
+      modal.style.display = "block";
+    };
+
+    span.onclick = function()
+    {
+      modal.style.display = "none";
+    };
+
+    window.onclick = function(event)
+    {
+      if(event.target == modal)
+      {
+        modal.style.display = "none";
+      }
+    };
+
+
+
+    var addContactForm = document.getElementById("addContactForm");
+    addContactForm.addEventListener("submit", function(event)
+    {
+      event.preventDefault();
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+      var linkedin = document.getElementById("linkedin").value;
+      var dateCreated = document.getElementById("dateCreated").value;
+      var table = document.getElementById("contactTable").getElementsByTagName("tbody")[0];
+      var newRow = table.insertRow(table.rows.length);
+      var nameCell = newRow.insertCell(0);
+      var emailCell = newRow.insertCell(1);
+      var phoneCell = newRow.insertCell(2);
+      var linkedinCell = newRow.insertCell(3);
+      var dateCreatedCell = newRow.insertCell(4);
+      var deleteCell = newRow.insertCell(5);
+      nameCell.innerHTML = name;
+      emailCell.innerHTML = email;
+      phoneCell.innerHTML = phone;
+      linkedinCell.innerHTML = '<a href="' + linkedin + '" class="linkedin-link" target="_blank">' + linkedin + '</a>';
+      dateCreatedCell.innerHTML = dateCreated;
+      deleteCell.innerHTML = '<button class="delete-ContactButton">Delete</button>';
+      modal.style.display = "none";
+
+      addContactForm.reset();
+
+      var deleteButtons = document.getElementsByClassName("delete-ContactButton");
+      for(var i = 0; i < deleteButtons.length; i++)
+      {
+        deleteButtons[i].addEventListener("click", function()
+        {
+          var row = this.parentNode.parentNode;
+          row.parentNode.removeChild(row);
+          savingSession();
+        });
+      }
+
+      savingSession();
+    });
+
+
+    var logoutButton = document.getElementById("logoutButton");
+    logoutButton.addEventListener("click", function()
+    {
+      window.location.href = "login.html";
+    });
+
+
+
+    var searchButton = document.getElementById("searchButton");
+    searchButton.addEventListener("click", function()
+    {
+      var searchText = document.getElementById("searchText").value.toLowerCase();
+      var rows = document.getElementById("contactTable").getElementsByTagName("tbody")[0].rows;
+      var searchResultCount = 0;
+
+      for(var i = 0; i < rows.length; i++)
+      {
+        var name = rows[i].cells[0].innerText.toLowerCase();
+        var email = rows[i].cells[1].innerText.toLowerCase();
+        var linkedin = rows[i].cells[3].innerText.toLowerCase();
+        var dateCreated = rows[i].cells[4].innerText.toLowerCase();
+
+        if(name.includes(searchText) || email.includes(searchText) || linkedin.includes(searchText) || dateCreated.includes(searchText))
+        {
+          rows[i].style.display = "";
+          searchResultCount++;
+        }
+        else
+        {
+          rows[i].style.display = "none";
+        }
+      }
+
+      var searchContactResult = document.getElementById("searchContactResult");
+      searchContactResult.innerText = "Found " + searchResultCount + " contacts matching the search criteria.";
+    });
+
+
+
+    function savingSession()
+    {
+      var contactsTable = document.getElementById("contactTable");
+      var rows = contactsTable.getElementsByTagName("tbody")[0].rows;
+      var sessionData = [];
+
+      for(var i = 0; i < rows.length; i++)
+      {
+        var name = rows[i].cells[0].innerText;
+        var email = rows[i].cells[1].innerText;
+        var phone = rows[i].cells[2].innerText;
+        var linkedin = rows[i].cells[3].innerText;
+        var dateCreated = rows[i].cells[4].innerText;
+        sessionData.push({ name: name, email: email, phone: phone, linkedin: linkedin, dateCreated: dateCreated });
+      }
+
+      localStorage.setItem("sessionData", JSON.stringify(sessionData));
+    }
+
+
+
+    function loadingSession()
+    {
+      var sessionData = localStorage.getItem("sessionData");
+
+      if(sessionData)
+      {
+        var contactsTable = document.getElementById("contactTable");
+        var rows = JSON.parse(sessionData);
+
+        for(var i = 0; i < rows.length; i++)
+        {
+          var newRow = contactsTable.getElementsByTagName("tbody")[0].insertRow(i);
+          var nameCell = newRow.insertCell(0);
+          var emailCell = newRow.insertCell(1);
+          var phoneCell = newRow.insertCell(2);
+          var linkedinCell = newRow.insertCell(3);
+          var dateCreatedCell = newRow.insertCell(4);
+          var deleteCell = newRow.insertCell(5);
+          nameCell.innerHTML = rows[i].name;
+          emailCell.innerHTML = rows[i].email;
+          phoneCell.innerHTML = rows[i].phone;
+          linkedinCell.innerHTML = '<a href="' + rows[i].linkedin + '" class="linkedin-link" target="_blank">' + rows[i].linkedin + '</a>';
+          dateCreatedCell.innerHTML = rows[i].dateCreated;
+          deleteCell.innerHTML = '<button class="delete-ContactButton">Delete</button>';
+        }
+      }
+
+      var deleteButtons = document.getElementsByClassName("delete-ContactButton");
+      for(var i = 0; i < deleteButtons.length; i++)
+      {
+        deleteButtons[i].addEventListener("click", function()
+        {
+          var row = this.parentNode.parentNode;
+          row.parentNode.removeChild(row);
+          savingSession();
+        });
+      }
+    }
+
+    loadingSession();
+
+  </script>
+
+</body>
+<!-- contactmanager.html End -->
+
+</html>

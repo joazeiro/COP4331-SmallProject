@@ -1,10 +1,16 @@
-contact{
+contact {
 
-    'first_name': '',
-    'last_name': '',
-    'email':'',
-    'phone':'',
-    'linkedin': '',
-    'date-created':''
+    'FirstName': '',
+    'LastName': '',
+    'Email':'',
+    'PhoneNumber':'',
+    'Linkedin': '',
+
+}
+
+users {
+
+    'Email': '',
+    'Password': '',
 
 }
