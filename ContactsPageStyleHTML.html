@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <title>Contacts</title>
 
 <!-- style.css Start -->
@@ -248,13 +249,13 @@
       width: 200px;
     }
   </style>
-</head>
 <!-- style.css End -->
 
 
 
 <!-- contactmanager.html Start -->
-<body>
+  </head>
+  <body>
 
   <h1>Contacts</h1>
   <div id="logInOut">
@@ -305,10 +306,9 @@
     var mdlbutton = document.getElementById("openAddModalButton");
     var span = document.getElementsByClassName("close")[0];
 
-
-    btn.onclick = function()
+    mdlbutton.onclick = function()
     {
-      mdlbutton.style.display = "block";
+      modal.style.display = "block";
     };
 
     span.onclick = function()
@@ -354,7 +354,6 @@
       addContactForm.reset();
 
       var deleteButtons = document.getElementsByClassName("delete-ContactButton");
-
       for(var i = 0; i < deleteButtons.length; i++)
       {
         deleteButtons[i].addEventListener("click", function()
