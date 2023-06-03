@@ -18,11 +18,18 @@ if ($connect_db->connect_error) {
     exit();
 }
 
-$email = htmlspecialchars($data["Email"]);
-$password = htmlspecialchars($data["Password"]);
+$email = isset($data["login"]) ? htmlspecialchars($data["login"]) : null;
+$password = isset($data["password"]) ? htmlspecialchars($data["password"]) : null;
+
+if ($email == null || $password == null) {
+    $error = '{"error":"Email and Password are required fields"}';
+    header('Content-type: application/json');
+    echo $error;
+    exit();
+}
 
 // Check if a user with the same email already exists
-$check_query = "SELECT * FROM users WHERE Email = '$Email'";
+$check_query = "SELECT * FROM users WHERE Email = '$email'";
 $check_result = $connect_db->query($check_query);
 
 if ($check_result->num_rows > 0) {
@@ -30,12 +37,15 @@ if ($check_result->num_rows > 0) {
     header('Content-type: application/json');
     echo $error;
 } else {
-    $firstName = htmlspecialchars($data["Firstname"]);
-    $lastName = htmlspecialchars($data["LastName"]);
-    $email = htmlspecialchars($data["Email"]);
-    $password = htmlspecialchars($data["Password"]);
+    $firstName = isset($data["firstName"]) ? htmlspecialchars($data["firstName"]) : null;
+    $lastName = isset($data["lastName"]) ? htmlspecialchars($data["lastName"]) : null;
 
-    $my_query = "INSERT INTO users (Email, Password) VALUES ('$email', '$password')";
+    var_dump($email);
+    var_dump($password);
+    var_dump($firstName);
+    var_dump($lastName);
+
+    $my_query = "INSERT INTO contact (Email, Password, FirstName, LastName) VALUES ('$email', '$password', '$firstName', '$lastName')";
     $query_result = $connect_db->query($my_query);
 
     if ($query_result === TRUE) {
