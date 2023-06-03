@@ -14,7 +14,7 @@ if ($db_connection->connect_error) {
     echo $message;
 } else {
     $sql = sprintf(
-        "INSERT INTO contact (FirstName, LastName, PhoneNumber, Email, Linkedin, User_ID) 
+        "INSERT INTO contact (FirstName, LastName, PhoneNumber, Email, Linkedin, user_ID) 
          VALUES ('%s', '%s', '%s', '%s', '%s', %d);",
         htmlspecialchars($data["FirstName"]),
         htmlspecialchars($data["LastName"]),
