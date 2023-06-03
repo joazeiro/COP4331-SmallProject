@@ -35,8 +35,8 @@ function sendData() {
     try {
         myRequest.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
-                  console.log(myRequest.responseText)
-                  const jsonObject = JSON.parse(myRequest.responseText);
+                console.log(myRequest.responseText)
+                const jsonObject = JSON.parse(myRequest.responseText);
                 CookieManager.userID = jsonObject.ID;
 
                 if (CookieManager.userID < 1) {
