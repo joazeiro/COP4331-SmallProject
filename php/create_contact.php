@@ -21,7 +21,7 @@ if ($db_connection->connect_error) {
         htmlspecialchars($data["PhoneNumber"]),
         htmlspecialchars($data["Email"]),
         htmlspecialchars($data["Linkedin"]),
-        $data["user_ID"]
+        $data["User_ID"]
     );
 
     if ($db_connection->query($sql) === TRUE) {

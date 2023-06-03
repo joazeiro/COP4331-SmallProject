@@ -16,6 +16,7 @@ if ($connect_db->connect_error) {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 $email = isset($data["login"]) ? htmlspecialchars($data["login"]) : null;
 $password = isset($data["password"]) ? htmlspecialchars($data["password"]) : null;
 
@@ -29,9 +30,13 @@ if ($email == null || $password == null) {
 $email = htmlspecialchars($data["email"]);
 $password = htmlspecialchars($data["password"]);
 >>>>>>> parent of d25dd32... fixin stuffs
+=======
+$email = htmlspecialchars($data["Email"]);
+$password = htmlspecialchars($data["Password"]);
+>>>>>>> parent of 04e2398... Styling update
 
 // Check if a user with the same email already exists
-$check_query = "SELECT * FROM users WHERE Email = '$email'";
+$check_query = "SELECT * FROM users WHERE Email = '$Email'";
 $check_result = $connect_db->query($check_query);
 
 if ($check_result->num_rows > 0) {
@@ -39,6 +44,7 @@ if ($check_result->num_rows > 0) {
     header('Content-type: application/json');
     echo $error;
 } else {
+<<<<<<< HEAD
 <<<<<<< HEAD
     $firstName = isset($data["firstName"]) ? htmlspecialchars($data["firstName"]) : null;
     $lastName = isset($data["lastName"]) ? htmlspecialchars($data["lastName"]) : null;
@@ -53,8 +59,14 @@ if ($check_result->num_rows > 0) {
     $email = htmlspecialchars($data["email"]);
     $password = htmlspecialchars($data["password"]);
 >>>>>>> parent of d25dd32... fixin stuffs
+=======
+    $firstName = htmlspecialchars($data["Firstname"]);
+    $lastName = htmlspecialchars($data["LastName"]);
+    $email = htmlspecialchars($data["Email"]);
+    $password = htmlspecialchars($data["Password"]);
+>>>>>>> parent of 04e2398... Styling update
 
-    $my_query = "INSERT INTO contact (Email, Password, FirstName, LastName) VALUES ('$email', '$password', '$firstName', '$lastName')";
+    $my_query = "INSERT INTO users (Email, Password) VALUES ('$email', '$password')";
     $query_result = $connect_db->query($my_query);
 
     if ($query_result === TRUE) {

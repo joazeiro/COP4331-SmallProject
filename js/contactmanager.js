@@ -84,6 +84,7 @@ function onDocumentLoad() {
         searchButton.onclick = () => searchContact();
     }
     
+    // addRow({ firstName: "Rick", lastName: "Leinecker", email: "myemail@email.com", phone: "999-999-9999", linkedin: "www.google.com", Id: "1", dateCreated: "5/31/23" });
 }
 
 function logout() {
