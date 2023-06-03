@@ -21,9 +21,9 @@ CREATE TABLE IF NOT EXISTS `contact`
     `Email` VARCHAR(50) NOT NULL DEFAULT '',
     `PhoneNumber` VARCHAR(50) NOT NULL DEFAULT '',
     `Linkedin` VARCHAR(100) NOT NULL DEFAULT '',
-    `user_ID` INT,
+    `UserID` INT,
     PRIMARY KEY (`ID`),
-    FOREIGN KEY (`user_ID`) REFERENCES `users` (`ID`)
+    FOREIGN KEY (`UserID`) REFERENCES `users` (`ID`)
 ) ENGINE = InnoDB;
 
 INSERT INTO `users` (`Email`, `Password`)
@@ -44,7 +44,7 @@ VALUES
     ('first14.last14@example.com', 'password14'),
     ('first15.last15@example.com', 'password15');
 
-INSERT INTO `contact` (`FirstName`, `LastName`, `PhoneNumber`, `Email`, `Linkedin`, `user_ID`)
+INSERT INTO `contact` (`FirstName`, `LastName`, `PhoneNumber`, `Email`, `Linkedin`, `UserID`)
 VALUES
     ('First1', 'Last1', '000000001', 'first1.last1@example.com', 'https://www.linkedin.com/in/first1last1', 1),
     ('First2', 'Last2', '000000002', 'first2.last2@example.com', 'https://www.linkedin.com/in/first2last2', 2),

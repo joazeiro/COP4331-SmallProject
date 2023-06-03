@@ -21,7 +21,6 @@ let editId = -1;
 
 function onDocumentLoad() {
     // CookieManager.read();
-    // document.getElementById("username").innerHTML = `${CookieManager.firstName} ${CookieManager.lastName}`;
     addContactForm = document.getElementById("addContactForm");
     editContactForm = document.getElementById("editContactForm"); 
     addContactResult = document.getElementById("addContactResult");
@@ -84,7 +83,6 @@ function onDocumentLoad() {
         searchButton.onclick = () => searchContact();
     }
     
-    // addRow({ firstName: "Rick", lastName: "Leinecker", email: "myemail@email.com", phone: "999-999-9999", linkedin: "www.google.com", Id: "1", dateCreated: "5/31/23" });
 }
 
 function logout() {
@@ -96,7 +94,7 @@ function addContact() {
     const addContactFormData = new FormData(addContactForm);
     const addContactFormObject = {};
     addContactFormData.forEach((value, key) => addContactFormObject[key] = value);
-    addContactFormObject["user_ID"] = CookieManager.userID;
+    addContactFormObject["UserID"] = CookieManager.userID;
     const addContactFormDataJSON = JSON.stringify(addContactFormObject);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/create_contact.php`, true);
@@ -117,7 +115,7 @@ function addContact() {
 
 function searchContact() {
     const query = document.getElementById("searchText").value;
-    const tmp = { user_ID: CookieManager.userID, search_criteria: query };
+    const tmp = { UserID: CookieManager.userID, search_criteria: query };
     const jsonPayload = JSON.stringify(tmp);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/search_contact.php`);
@@ -144,18 +142,18 @@ function searchContact() {
 
 function addRow(o) {
     const myRow = contactTable.insertRow();
-    const firstNameCell = myRow.insertCell(0);
-    firstNameCell.innerHTML = o.firstName;
-    const lastNameCell = myRow.insertCell(1);
-    lastNameCell.innerHTML = o.lastName;
-    const emailCell = myRow.insertCell(2);
-    emailCell.innerHTML = o.email;
-    const phoneCell = myRow.insertCell(3);
-    phoneCell.innerHTML = o.phone;
-    const linkedinCell = myRow.insertCell(4);
-    linkedinCell.innerHTML = o.linkedin;
-    const idCell = myRow.insertCell(5);
-    idCell.innerHTML = o.Id;
+    const FirstNameCell = myRow.insertCell(0);
+    FirstNameCell.innerHTML = o.FirstName;
+    const LastNameCell = myRow.insertCell(1);
+    LastNameCell.innerHTML = o.LastName;
+    const EmailCell = myRow.insertCell(2);
+    EmailCell.innerHTML = o.Email;
+    const PhoneCell = myRow.insertCell(3);
+    PhoneCell.innerHTML = o.PhoneNumber;
+    const LinkedinCell = myRow.insertCell(4);
+    LinkedinCell.innerHTML = o.Linkedin;
+    const IDCell = myRow.insertCell(5);
+    IDCell.innerHTML = o.Id;
     const dateCreatedCell = myRow.insertCell(6);
     dateCreatedCell.innerHTML = o.dateCreated;
     const editButtonCell = myRow.insertCell(7);
@@ -190,7 +188,7 @@ function editContact() {
     const editContactFormData = new FormData(editContactForm);
     const editContactFormObject = {};
     editContactFormData.forEach((value, key) => editContactFormObject[key] = value);
-    editContactFormObject["user_ID"] = CookieManager.userID;
+    editContactFormObject["UserID"] = CookieManager.userID;
     editContactFormObject["ID"] = editId;
     const editContactFormDataJSON = JSON.stringify(editContactFormObject);
     const myRequest = new XMLHttpRequest();
@@ -224,7 +222,7 @@ function openDeleteModal(i) {
 }
 
 function deleteContact() {
-    const deleteObject = { id: document.getElementById("deleteContactId").innerHTML, user_ID: CookieManager.userID };
+    const deleteObject = { ID: document.getElementById("deleteContactId").innerHTML, UserID: CookieManager.userID };
     const deleteObjectJSON = JSON.stringify(deleteObject);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/delete_contact.php`, true);

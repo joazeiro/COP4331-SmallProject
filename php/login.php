@@ -1,8 +1,7 @@
 <?php
 
-// login (very basic), check if username and password match with database one
-
-// db connection stuff (not sure yet what username and password it will be)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $data = get_info();
 $db_username = "db";
@@ -13,10 +12,13 @@ $connect_db = new mysqli("localhost", $db_username, $db_pwd, $db_name);
 
 // check if connection to the database was successful
 if (!$connect_db->connect_error) {
+
+    var_dump($data);
+
     // check if user exists in the database
-    $email = $data["Email"];
-    $password = $data["Password"];
-    $query_user = "SELECT ID, FirstName, LastName FROM users WHERE Email='" . htmlspecialchars($data["Email"]) . "' AND Password='" . htmlspecialchars($data["Password"]) . "';";
+    $Email = $data["Login"];
+    $Password = $data["Password"];
+    $query_user = "SELECT ID FROM users WHERE Email='" . htmlspecialchars($data["Login"]) . "' AND Password='" . htmlspecialchars($data["Password"]) . "';";
     $query_result = $connect_db->query($query_user);
 
     if ($query_result && $query_result->num_rows > 0) {
@@ -26,9 +28,9 @@ if (!$connect_db->connect_error) {
         $id = $row["ID"];
 
         $body_json = [
-            "id" => $id,
-            "firstName" => $first_name,
-            "lastName" => $last_name,
+            "ID" => $ID,
+            "first_name" => $first_name,
+            "last_name" => $last_name,
             "error" => ""
         ];
 

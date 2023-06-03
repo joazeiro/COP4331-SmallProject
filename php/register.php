@@ -18,8 +18,10 @@ if ($connect_db->connect_error) {
     exit();
 }
 
-$email = htmlspecialchars($data["Email"]);
-$password = htmlspecialchars($data["Password"]);
+// var_dump($data);
+
+$Email = htmlspecialchars($data["Login"]);
+$Password = htmlspecialchars($data["Password"]);
 
 // Check if a user with the same email already exists
 $check_query = "SELECT * FROM users WHERE Email = '$Email'";
@@ -30,12 +32,12 @@ if ($check_result->num_rows > 0) {
     header('Content-type: application/json');
     echo $error;
 } else {
-    $firstName = htmlspecialchars($data["Firstname"]);
-    $lastName = htmlspecialchars($data["LastName"]);
-    $email = htmlspecialchars($data["Email"]);
-    $password = htmlspecialchars($data["Password"]);
+    $FirstName = htmlspecialchars($data["FirstName"]);
+    $LastName = htmlspecialchars($data["LastName"]);
+    $Email = htmlspecialchars($data["Login"]);
+    $Password = htmlspecialchars($data["Password"]);
 
-    $my_query = "INSERT INTO users (Email, Password) VALUES ('$email', '$password')";
+    $my_query = "INSERT INTO users (Email, Password) VALUES ('$Email', '$Password')";
     $query_result = $connect_db->query($my_query);
 
     if ($query_result === TRUE) {

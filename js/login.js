@@ -4,17 +4,17 @@ import { url } from './sharedVariables.js';
 // const {CookieManager} = require("./cookiemanager.js");
 // const {url} = require('./sharedvariables.js'); 
 
-var loginForm = null;
+var LoginForm = null;
 
 document.addEventListener("DOMContentLoaded", onDocumentLoad, false);
 
 function onDocumentLoad() {
     //CookieManager.read();
 
-    loginForm = document.getElementById("loginForm");
+    LoginForm = document.getElementById("LoginForm");
 
-    if(loginForm != null){
-        loginForm.addEventListener("submit", (event) => {
+    if(LoginForm != null){
+        LoginForm.addEventListener("submit", (event) => {
             CookieManager.clear();
             event.preventDefault();
             sendData();
@@ -24,10 +24,10 @@ function onDocumentLoad() {
 }
 
 function sendData() {
-    const loginFormData = new FormData(loginForm);
-    const loginFormObject = {};
-    loginFormData.forEach((value, key) => loginFormObject[key] = value);
-    const loginFormDataJSON = JSON.stringify(loginFormObject);
+    const LoginFormData = new FormData(LoginForm);
+    const LoginFormObject = {};
+    LoginFormData.forEach((value, key) => LoginFormObject[key] = value);
+    const LoginFormDataJSON = JSON.stringify(LoginFormObject);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/login.php`);
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -35,23 +35,25 @@ function sendData() {
     try {
         myRequest.onreadystatechange = function() {
             if (this.readyState === 4 && this.status === 200) {
-                const jsonObject = JSON.parse(myRequest.responseText);
-                CookieManager.userID = jsonObject.id;
+                  console.log(myRequest.responseText)
+                  const jsonObject = JSON.parse(myRequest.responseText);
+                CookieManager.userID = jsonObject.ID;
 
                 if (CookieManager.userID < 1) {
-                    document.getElementById("loginStatus").innerHTML = "Incorrect username and password combination.";
+                    document.getElementById("LoginStatus").innerHTML = "Incorrect username and password combination.";
                     return;
                 }
 
-                CookieManager.firstName = jsonObject.firstName;
-                CookieManager.lastName = jsonObject.lastName;
+                CookieManager.FirstName = jsonObject.FirstName;
+                CookieManager.LastName = jsonObject.LastName;
                 CookieManager.save();
                 window.location.href = "../html/contactmanager.html";
             }
         };
-        myRequest.send(loginFormDataJSON);
+
+        myRequest.send(LoginFormDataJSON); // {"Login":"parkercmcleod@gmail.com","Password":"ffdafasdf"}
     } catch (err) {
-        document.getElementById("loginStatus").innerHTML = err.message;
+        document.getElementById("LoginStatus").innerHTML = err.message;
     }
 }
 

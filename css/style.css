@@ -145,3 +145,7 @@ body {
 .myTable td {
   border: 1px solid;
 }
+
+.registrationResult {
+  text-align: center;
+}
