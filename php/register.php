@@ -15,8 +15,6 @@ if ($connect_db->connect_error) {
     exit();
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 $email = isset($data["login"]) ? htmlspecialchars($data["login"]) : null;
 $password = isset($data["password"]) ? htmlspecialchars($data["password"]) : null;
 
@@ -26,14 +24,8 @@ if ($email == null || $password == null) {
     echo $error;
     exit();
 }
-=======
 $email = htmlspecialchars($data["email"]);
 $password = htmlspecialchars($data["password"]);
->>>>>>> parent of d25dd32... fixin stuffs
-=======
-$email = htmlspecialchars($data["Email"]);
-$password = htmlspecialchars($data["Password"]);
->>>>>>> parent of 04e2398... Styling update
 
 // Check if a user with the same email already exists
 $check_query = "SELECT * FROM users WHERE Email = '$Email'";
