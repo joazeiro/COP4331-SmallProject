@@ -136,7 +136,7 @@ function searchContact() {
         };
         myRequest.send(jsonPayload);
     } catch (error) {
-        document.getElementById("searchContactResult") = error.message;
+        document.getElementById("searchContactResult").innerHTML = error.message;
     }
 }
 

@@ -1,7 +1,7 @@
 export class CookieManager {
-    static FirstName = "";
-    static LastName = "";
     static userID = -1;
+    static Email = "";
+    static Password = -1;
     static #lifespan = 1200000;
 
     static read() {
@@ -13,14 +13,14 @@ export class CookieManager {
             const tokens = currentEntry.split("=");
 
             switch (tokens[0]) {
-                case "FirstName":
-                    this.FirstName = tokens[1];
+                case "userID":
+                    this.userID = tokens[1];
                     break;
                 case "LastName":
-                    this.LastName = tokens[1];
+                    this.Password = tokens[1];
                     break;
                 case "userID":
-                    this.userID = parseInt(tokens[1].trim());
+                    this.Email = parseInt(tokens[1].trim());
                     break;
             }
         }
@@ -34,9 +34,9 @@ export class CookieManager {
         const expirationDate = new Date();
         expirationDate.setTime(expirationDate.getTime() + CookieManager.#lifespan);
         document.cookie =
-            `FirstName=${this.FirstName},` +
-            `LastName=${this.LastName},` +
             `userID=${this.userID},` +
+            `Email=${this.Email},` +
+            `Password=${this.Password},` +
             `path=/,` +
             `expires=${expirationDate}`;
     }
