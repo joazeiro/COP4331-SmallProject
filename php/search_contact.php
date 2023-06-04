@@ -27,7 +27,7 @@ if ($db_connection->connect_error) {
     OR `Linkedin` LIKE '%" . $search_criteria . "%' 
     OR `ID` = '" . $search_criteria . "' 
     OR `CreationDate` LIKE '%" . $search_criteria . "%') 
-    AND `ID` = '" . $ID . "' 
+    AND (`ID` = '" . $ID . "' OR `ID` IS NULL) 
     LIMIT 10;";
 
     $result = $db_connection->query($sql);

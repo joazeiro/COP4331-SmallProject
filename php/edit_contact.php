@@ -12,30 +12,32 @@ $db_name = "ContactDatabase";
 $db_connection = new mysqli("localhost", $db_username, $db_pwd, $db_name);
 
 if ($db_connection->connect_error) {
-    $message = '{"message":"' . $db_connection->connect_error . '"}';
-    header('Content-type: application/json');
-    echo $message;
+    $response = array('message' => $db_connection->connect_error);
 } else {
-    $sql = sprintf(
-        "UPDATE contact SET FirstName = '%s', LastName = '%s', Email = '%s', PhoneNumber = '%s', Linkedin = '%s' WHERE ID = %d",
-        htmlspecialchars($data["FirstName"]),
-        htmlspecialchars($data["LastName"]),
-        htmlspecialchars($data["Email"]),
-        htmlspecialchars($data["PhoneNumber"]),
-        htmlspecialchars($data["Linkedin"]),
-        $data["ID"]
-    );
+    $id = $data["ID"];
+    $firstName = $db_connection->real_escape_string($data["FirstName"]);
+    $lastName = $db_connection->real_escape_string($data["LastName"]);
+    $email = $db_connection->real_escape_string($data["Email"]);
+    $phoneNumber = $db_connection->real_escape_string($data["PhoneNumber"]);
+    $linkedin = $db_connection->real_escape_string($data["Linkedin"]);
+
+    $sql = "UPDATE contact SET 
+                FirstName = '$firstName', 
+                LastName = '$lastName', 
+                Email = '$email', 
+                PhoneNumber = '$phoneNumber', 
+                Linkedin = '$linkedin' 
+            WHERE ID = $id";
 
     if ($db_connection->query($sql) === true) {
-        $message = '{"message":"Updated"}';
-        header('Content-type: application/json');
-        echo $message;
+        $response = array('message' => 'Updated');
     } else {
-        $message = '{"message":"Not Updated"}';
-        header('Content-type: application/json');
-        echo $message;
+        $response = array('message' => 'Not Updated');
     }
 
     $db_connection->close();
 }
+
+header('Content-type: application/json');
+echo json_encode($response);
 ?>

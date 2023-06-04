@@ -15,15 +15,52 @@ if ($db_connection->connect_error) {
     header('Content-type: application/json');
     echo $message;
 } else {
+    $email = htmlspecialchars($data["Email"]);
+    $phone = htmlspecialchars($data["PhoneNumber"]);
+    $linkedin = htmlspecialchars($data["Linkedin"]);
+
+    // Check if contact with the same email exists
+    $checkEmailQuery = "SELECT * FROM contact WHERE Email = '$email'";
+    $emailResult = $db_connection->query($checkEmailQuery);
+    if ($emailResult->num_rows > 0) {
+        $message = '{"message":"A contact with the same email already exists"}';
+        header('Content-type: application/json');
+        echo $message;
+        $db_connection->close();
+        exit;
+    }
+
+    // Check if contact with the same phone number exists
+    $checkPhoneQuery = "SELECT * FROM contact WHERE PhoneNumber = '$phone'";
+    $phoneResult = $db_connection->query($checkPhoneQuery);
+    if ($phoneResult->num_rows > 0) {
+        $message = '{"message":"A contact with the same phone number already exists"}';
+        header('Content-type: application/json');
+        echo $message;
+        $db_connection->close();
+        exit;
+    }
+
+    // Check if contact with the same LinkedIn profile exists
+    $checkLinkedinQuery = "SELECT * FROM contact WHERE Linkedin = '$linkedin'";
+    $linkedinResult = $db_connection->query($checkLinkedinQuery);
+    if ($linkedinResult->num_rows > 0) {
+        $message = '{"message":"A contact with the same LinkedIn profile already exists"}';
+        header('Content-type: application/json');
+        echo $message;
+        $db_connection->close();
+        exit;
+    }
+
     $sql = sprintf(
         "INSERT INTO contact (ID, FirstName, LastName, PhoneNumber, Email, Linkedin) 
          VALUES ('%d', '%s', '%s', '%s', '%s', '%s');",
         $data["ID"],
         htmlspecialchars($data["FirstName"]),
         htmlspecialchars($data["LastName"]),
-        htmlspecialchars($data["PhoneNumber"]),
-        htmlspecialchars($data["Email"]),
-        htmlspecialchars($data["Linkedin"])
+        $phone,
+        $email,
+        $linkedin
     );
     if ($db_connection->query($sql) === TRUE) {
         $message = '{"message":"Contact added successfully"}';

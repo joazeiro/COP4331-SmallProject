@@ -40,6 +40,7 @@ function onDocumentLoad() {
         addContactForm.addEventListener("submit", (event) => {
             event.preventDefault();
             addContact();
+            searchContact();
         });
     }
 
@@ -107,33 +108,38 @@ function addContact() {
         myRequest.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 const jsonObject = JSON.parse(myRequest.responseText);
-                addContactResult.innerHTML = jsonObject.message;
+                if (jsonObject.success) {
+                    addContactResult.innerHTML = jsonObject.message;
+                    searchContact();
+                } else {
+                    addContactResult.innerHTML = jsonObject.message;
+                }
             }
         };
         myRequest.send(addContactFormDataJSON);
     } catch (error) {
         addContactResult.innerHTML = error.message;
     }
-    searchContact(); // populate contacts
 }
 
 function searchContact() {
     const query = document.getElementById("searchText").value;
-    const tmp = { ID: getCookie("ID"), search_criteria: query };
+    const tmp = { ID: getCookie("ID"), search_criteria: query};
     const jsonPayload = JSON.stringify(tmp);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/search_contact.php`);
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try {
-        for (let i = 1; i < contactTable.getElementsByTagName("tr").length; i++) {
-            contactTable.deleteRow(i);
+        while (contactTable.rows.length > 1) {
+            contactTable.deleteRow(1);
         }
 
         myRequest.onreadystatechange = function() {
             if (myRequest.readyState == 4 && myRequest.status == 200) {
                 const jsonObject = JSON.parse(myRequest.responseText);
-                jsonObject.results.forEach(o => {
+                const results = jsonObject.results.slice(0, 10); // Limit the results to 10 elements
+                results.forEach(o => {
                     addRow(o);
                 });
             }
@@ -142,15 +148,6 @@ function searchContact() {
     } catch (error) {
         document.getElementById("searchContactResult") = error.message;
     }
-}
-
-function formattedDate(){
-    var date = new Date();
-    var year = date.getFullYear();
-    //date.getMonth: January => 0
-    var month = 1 + date.getMonth();
-    var day = date.getDate();
-    return `${month <= 9 ? '0' + month : month}/${day <= 9 ? '0' + day : day}/${year}`;
 }
 
 function addRow(o) {
@@ -201,7 +198,7 @@ function editContact() {
     const editContactFormData = new FormData(editContactForm);
     const editContactFormObject = {};
     editContactFormData.forEach((value, key) => editContactFormObject[key] = value);
-    editContactFormObject["ID"] = CookieManager.ID;
+    editContactFormObject["ID"] = getCookie("ID");
     editContactFormObject["ID"] = editId;
     const editContactFormDataJSON = JSON.stringify(editContactFormObject);
     const myRequest = new XMLHttpRequest();
@@ -235,7 +232,7 @@ function openDeleteModal(i) {
 }
 
 function deleteContact() {
-    const deleteObject = { ID: document.getElementById("deleteContactId").innerHTML, ID: CookieManager.ID };
+    const deleteObject = {CreationDate: document.getElementById("deleteContactDateCreated").innerHTML};
     const deleteObjectJSON = JSON.stringify(deleteObject);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/delete_contact.php`, true);

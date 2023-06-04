@@ -14,8 +14,8 @@ $db_connection = new mysqli("localhost", $db_username, $db_pwd, $db_name);
 if ($db_connection->connect_error) {
     $response = array('message' => $db_connection->connect_error);
 } else {
-    $id = $data["ID"];
-    $sql = "DELETE FROM contact WHERE ID = '$id';";
+    $CreationDate = $data["CreationDate"];
+    $sql = "DELETE FROM contact WHERE CreationDate = '$CreationDate';";
     $result = $db_connection->query($sql);
 
     if ($result === true) {
