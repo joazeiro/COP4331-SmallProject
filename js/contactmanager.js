@@ -14,7 +14,6 @@ var openAddModalButton = null;
 var addContactClose = null;
 var editContactClose = null;
 var deleteContactClose = null;
-var deleteCancelButton = null;
 var deleteConfirmButton = null;
 var searchButton = null;
 let editId = -1;
