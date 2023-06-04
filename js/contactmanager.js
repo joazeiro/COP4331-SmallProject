@@ -94,8 +94,8 @@ function logout() {
 function addContact() {
     const addContactFormData = new FormData(addContactForm);
     const addContactFormObject = {};
-    const userIDCookie = getCookie("userID");
-    addContactFormObject["UserID"] = userIDCookie;
+    const IDCookie = getCookie("ID");
+    addContactFormObject["ID"] = IDCookie;
     addContactFormData.forEach((value, key) => addContactFormObject[key] = value);
     const addContactFormDataJSON = JSON.stringify(addContactFormObject);
     const myRequest = new XMLHttpRequest();
@@ -117,7 +117,7 @@ function addContact() {
 
 function searchContact() {
     const query = document.getElementById("searchText").value;
-    const tmp = { userID: CookieManager.userID, search_criteria: query };
+    const tmp = { ID: getCookie("ID"), search_criteria: query };
     const jsonPayload = JSON.stringify(tmp);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/search_contact.php`);
@@ -164,7 +164,7 @@ function addRow(o) {
     const LinkedinCell = myRow.insertCell(4);
     LinkedinCell.innerHTML = o.Linkedin;
     const IDCell = myRow.insertCell(5);
-    IDCell.innerHTML = o.Id;
+    IDCell.innerHTML = o.ID;
     const creationDateCell = myRow.insertCell(6);
     creationDateCell.innerHTML = o.CreationDate;
     const editButtonCell = myRow.insertCell(7);
@@ -199,7 +199,7 @@ function editContact() {
     const editContactFormData = new FormData(editContactForm);
     const editContactFormObject = {};
     editContactFormData.forEach((value, key) => editContactFormObject[key] = value);
-    editContactFormObject["userID"] = CookieManager.userID;
+    editContactFormObject["ID"] = CookieManager.ID;
     editContactFormObject["ID"] = editId;
     const editContactFormDataJSON = JSON.stringify(editContactFormObject);
     const myRequest = new XMLHttpRequest();
@@ -233,7 +233,7 @@ function openDeleteModal(i) {
 }
 
 function deleteContact() {
-    const deleteObject = { ID: document.getElementById("deleteContactId").innerHTML, userID: CookieManager.userID };
+    const deleteObject = { ID: document.getElementById("deleteContactId").innerHTML, ID: CookieManager.ID };
     const deleteObjectJSON = JSON.stringify(deleteObject);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/delete_contact.php`, true);

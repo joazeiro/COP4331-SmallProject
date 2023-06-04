@@ -1,5 +1,5 @@
 export class CookieManager {
-    static userID = -1;
+    static ID = -1;
     static Email = "";
     static Password = "";
     static #lifespan = 1200000;
@@ -13,8 +13,8 @@ export class CookieManager {
             const tokens = currentEntry.split("=");
 
             switch (tokens[0]) {
-                case "userID":
-                    this.userID = parseInt(tokens[1].trim());
+                case "ID":
+                    this.ID = parseInt(tokens[1].trim());
                     break;
                 case "Email":
                     this.Email = tokens[1];
@@ -25,7 +25,7 @@ export class CookieManager {
             }
         }
 
-        if (this.userID < 0 && window.location.pathname !== "/html/login.html") {
+        if (this.ID < 0 && window.location.pathname !== "/html/login.html") {
             window.location.href = "../html/login.html";
         }
     }
@@ -34,13 +34,13 @@ export class CookieManager {
         const expirationDate = new Date();
         expirationDate.setTime(expirationDate.getTime() + CookieManager.#lifespan);
     
-        document.cookie = `userID=${this.userID}; path=/; expires=${expirationDate.toUTCString()}`;
+        document.cookie = `ID=${this.ID}; path=/; expires=${expirationDate.toUTCString()}`;
         document.cookie = `Email=${this.Email}; path=/; expires=${expirationDate.toUTCString()}`;
         document.cookie = `Password=${this.Password}; path=/; expires=${expirationDate.toUTCString()}`;
     }
 
     static clear() {
-        this.userID = -1;
+        this.ID = -1;
         this.Email = "";
         this.Password = "";
         document.cookie = "expires=Thu, 01 Jan 1970 00:00:00 GMT";

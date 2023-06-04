@@ -43,11 +43,11 @@ function sendData() {
             if (this.readyState === 4 && this.status === 200) {
                 console.log(myRequest.responseText)
                 const jsonObject = JSON.parse(myRequest.responseText);
-                CookieManager.userID = jsonObject.ID;
+                CookieManager.ID = jsonObject.ID;
                 CookieManager.Email = jsonObject.Email;
                 CookieManager.Password = jsonObject.Password;
 
-                if (CookieManager.userID < 1) {
+                if (CookieManager.ID < 1) {
                     document.getElementById("LoginStatus").innerHTML = "Incorrect username and password combination.";
                     return;
                 }

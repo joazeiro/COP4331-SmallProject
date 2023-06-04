@@ -17,10 +17,11 @@ if ($db_connection->connect_error) {
     echo $my_error;
 } else {
     $search_criteria = $data["search_criteria"];
+    $ID = $data["ID"];
 
-    $sql = "SELECT * FROM contact WHERE (`FirstName` LIKE '%" . $search_criteria . "%' OR `LastName` LIKE '%" . $search_criteria . "%' OR `PhoneNumber` LIKE '%" . $search_criteria . "%' OR `Email` LIKE '%" . $search_criteria . "%' OR `Linkedin` LIKE '%" . $search_criteria . "%');";
+    $sql = "SELECT * FROM contact WHERE (`FirstName` LIKE '%" . $search_criteria . "%' OR `LastName` LIKE '%" . $search_criteria . "%' OR `PhoneNumber` LIKE '%" . $search_criteria . "%' OR `Email` LIKE '%" . $search_criteria . "%' OR `Linkedin` LIKE '%" . $search_criteria . "%'OR `ID` LIKE '%" . $search_criteria . "%'OR `CreationDate` LIKE '%" . $search_criteria . "%') AND `ID` = " . $ID . ";";
     $result = $db_connection->query($sql);
-
+    
     if ($result->num_rows > 0) {
         grab_rows($result);
     } else {
@@ -34,13 +35,28 @@ if ($db_connection->connect_error) {
 
 function grab_rows($result)
 {
-    $value = '{"results":[';
+    $field_names = $result->fetch_fields();
+    $field_values = array();
+
     while ($row = $result->fetch_assoc()) {
-        $value .= sprintf('{"ID":%d,"FirstName":"%s","LastName":"%s","PhoneNumber":"%s","Email":"%s","Linkedin":"%s"},',
-            $row["ID"], $row["FirstName"], $row["LastName"], $row["PhoneNumber"], $row["Email"], $row["Linkedin"]);
+        $field_values[] = $row;
     }
-    $value = rtrim($value, ',') . '], "error":""}';
+
+    $results = array();
+    foreach ($field_values as $row) {
+        $result_data = array();
+        foreach ($field_names as $field) {
+            $result_data[$field->name] = $row[$field->name];
+        }
+        $results[] = $result_data;
+    }
+
+    $response = array(
+        'results' => $results,
+        'error' => ""
+    );
+
     header('Content-type: application/json');
-    echo $value;
+    echo json_encode($response);
 }
 ?>
