@@ -106,7 +106,7 @@ function addContact() {
                 addContactResult.innerHTML = jsonObject.message;
             }
         };
-        myRequest.send(addContactFormDataJSON);
+        myRequest.send(addContactFormDataJSON); // "{\"FirstName\":\"Parker\",\"LastName\":\"McLeod\",\"Email\":\"parkercmcleod@gmail.com\",\"PhoneNumber\":\"6784488409\",\"Linkedin\":\"https://www.linkedin.com/in/first1last1\",\"UserID\":-1}"
     } catch (error) {
         addContactResult.innerHTML = error.message;
     }
