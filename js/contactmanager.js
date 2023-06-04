@@ -81,6 +81,8 @@ function onDocumentLoad() {
     if(searchButton != null){
         searchButton.onclick = () => searchContact();
     }
+
+    //addRow({FirstName: "Rick", LastName: "Leinecker", Email: "myemail@email.com", PhoneNumber: "999-999-9999", Linkedin: "www.google.com", Id: "1", CreationDate: formattedDate()});
     
 }
 
@@ -94,6 +96,7 @@ function addContact() {
     const addContactFormObject = {};
     addContactFormData.forEach((value, key) => addContactFormObject[key] = value);
     addContactFormObject["UserID"] = CookieManager.userID;
+    addContactFormObject["CreationDate"] = formattedDate();
     const addContactFormDataJSON = JSON.stringify(addContactFormObject);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/create_contact.php`, true);
@@ -106,7 +109,7 @@ function addContact() {
                 addContactResult.innerHTML = jsonObject.message;
             }
         };
-        myRequest.send(addContactFormDataJSON); // "{\"FirstName\":\"Parker\",\"LastName\":\"McLeod\",\"Email\":\"parkercmcleod@gmail.com\",\"PhoneNumber\":\"6784488409\",\"Linkedin\":\"https://www.linkedin.com/in/first1last1\",\"UserID\":-1}"
+        myRequest.send(addContactFormDataJSON);
     } catch (error) {
         addContactResult.innerHTML = error.message;
     }
@@ -135,8 +138,17 @@ function searchContact() {
         };
         myRequest.send(jsonPayload);
     } catch (error) {
-        document.getElementById("searchContactResult").innerHTML = error.message;
+        document.getElementById("searchContactResult") = error.message;
     }
+}
+
+function formattedDate(){
+    var date = new Date();
+    var year = date.getFullYear();
+    //date.getMonth: January => 0
+    var month = 1 + date.getMonth();
+    var day = date.getDate();
+    return `${month <= 9 ? '0' + month : month}/${day <= 9 ? '0' + day : day}/${year}`;
 }
 
 function addRow(o) {
@@ -153,8 +165,8 @@ function addRow(o) {
     LinkedinCell.innerHTML = o.Linkedin;
     const IDCell = myRow.insertCell(5);
     IDCell.innerHTML = o.Id;
-    const dateCreatedCell = myRow.insertCell(6);
-    dateCreatedCell.innerHTML = o.dateCreated;
+    const creationDateCell = myRow.insertCell(6);
+    creationDateCell.innerHTML = o.CreationDate;
     const editButtonCell = myRow.insertCell(7);
     const editButton = document.createElement("button");
     editButton.type = "button";

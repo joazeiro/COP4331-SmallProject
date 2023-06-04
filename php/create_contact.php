@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 $data = json_decode(file_get_contents('php://input'), true);
 
 $db_username = "db";
@@ -13,6 +16,7 @@ if ($db_connection->connect_error) {
     header('Content-type: application/json');
     echo $message;
 } else {
+    var_dump($data);
     $sql = sprintf(
         "INSERT INTO contact (FirstName, LastName, PhoneNumber, Email, Linkedin, User_ID) 
          VALUES ('%s', '%s', '%s', '%s', '%s', %d);",
@@ -23,7 +27,7 @@ if ($db_connection->connect_error) {
         htmlspecialchars($data["Linkedin"]),
         $data["User_ID"]
     );
-
+    var_dump($sql);
     if ($db_connection->query($sql) === TRUE) {
         $message = '{"message":"Contact added successfully"}';
         header('Content-type: application/json');
