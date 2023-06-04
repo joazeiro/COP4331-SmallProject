@@ -6,7 +6,7 @@ export class CookieManager {
 
     static read() {
         const cookie = document.cookie;
-        const splitCookie = cookie.split(",");
+        const splitCookie = cookie.split(";");
 
         for (let i = 0; i < splitCookie.length; i++) {
             const currentEntry = splitCookie[i].trim();
