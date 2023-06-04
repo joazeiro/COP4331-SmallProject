@@ -12,22 +12,22 @@ $db_name = "ContactDatabase";
 $db_connection = new mysqli("localhost", $db_username, $db_pwd, $db_name);
 
 if ($db_connection->connect_error) {
-    $message = '{"message":"' . $db_connection->connect_error . '"}';
-    header('Content-type: application/json');
-    echo $message;
+    $response = array('message' => $db_connection->connect_error);
 } else {
-    $sql = "DELETE FROM contact WHERE (`ID` = " . $data["ID"] . ");";
+    $id = $data["ID"];
+    $sql = "DELETE FROM contact WHERE ID = '$id';";
     $result = $db_connection->query($sql);
 
     if ($result === true) {
-        $message = '{"message":"Deleted"}';
+        $response = array('message' => 'Deleted');
     } else {
-        $message = '{"message":"Not Deleted"}';
+        $response = array('message' => 'Not Deleted');
     }
-
-    header('Content-type: application/json');
-    echo $message;
 
     $db_connection->close();
 }
+
+header('Content-type: application/json');
+echo json_encode($response);
 ?>
+

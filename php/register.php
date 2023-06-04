@@ -18,8 +18,6 @@ if ($connect_db->connect_error) {
     exit();
 }
 
-// var_dump($data);
-
 $Email = htmlspecialchars($data["Login"]);
 $Password = htmlspecialchars($data["Password"]);
 

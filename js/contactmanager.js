@@ -27,6 +27,7 @@ function onDocumentLoad() {
     editContactModal = document.getElementById("editContactModal");
     deleteContactModal = document.getElementById("deleteContactModal");
     contactTable = document.getElementById("contactTable");
+    searchContact(); // populate contacts
 
     if(editContactForm != null){
         editContactForm.addEventListener("submit", (event) => {
@@ -113,6 +114,7 @@ function addContact() {
     } catch (error) {
         addContactResult.innerHTML = error.message;
     }
+    searchContact(); // populate contacts
 }
 
 function searchContact() {
@@ -250,6 +252,7 @@ function deleteContact() {
     } catch (error) {
         deleteContactResult.innerHTML = error.message;
     }
+    searchContact(); // populate contacts
 };
 
 function getCookie(cookieName) {

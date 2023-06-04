@@ -19,7 +19,17 @@ if ($db_connection->connect_error) {
     $search_criteria = $data["search_criteria"];
     $ID = $data["ID"];
 
-    $sql = "SELECT * FROM contact WHERE (`FirstName` LIKE '%" . $search_criteria . "%' OR `LastName` LIKE '%" . $search_criteria . "%' OR `PhoneNumber` LIKE '%" . $search_criteria . "%' OR `Email` LIKE '%" . $search_criteria . "%' OR `Linkedin` LIKE '%" . $search_criteria . "%'OR `ID` LIKE '%" . $search_criteria . "%'OR `CreationDate` LIKE '%" . $search_criteria . "%') AND `ID` = " . $ID . ";";
+    $sql = "SELECT * FROM contact WHERE 
+    (`FirstName` LIKE '%" . $search_criteria . "%' 
+    OR `LastName` LIKE '%" . $search_criteria . "%' 
+    OR `PhoneNumber` LIKE '%" . $search_criteria . "%' 
+    OR `Email` LIKE '%" . $search_criteria . "%' 
+    OR `Linkedin` LIKE '%" . $search_criteria . "%' 
+    OR `ID` = '" . $search_criteria . "' 
+    OR `CreationDate` LIKE '%" . $search_criteria . "%') 
+    AND `ID` = '" . $ID . "' 
+    LIMIT 10;";
+
     $result = $db_connection->query($sql);
     
     if ($result->num_rows > 0) {

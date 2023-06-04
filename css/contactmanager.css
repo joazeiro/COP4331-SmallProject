@@ -185,6 +185,19 @@ body {
   background-color: #E8AA42;
 }
 
+#openAddModalButton {
+  background-color: #E57C23;
+  color: #F8F1F1;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 10px 16px;
+  border: none;
+}
+
+#openAddModalButton:hover {
+  background-color: #E8AA42;
+}
+
 #contactTable {
   margin-top: 20px;
   width: 100%;
@@ -241,7 +254,8 @@ body {
   border-radius: 5px;
   padding: 10px 16px;
   border: none;
-  margin-top: 20px;
+  margin: 20px auto; 
+  display: block; 
 }
 
 #openAddModalButton:hover {
