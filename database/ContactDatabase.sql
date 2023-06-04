@@ -15,13 +15,13 @@ CREATE TABLE IF NOT EXISTS `users`
 
 CREATE TABLE IF NOT EXISTS `contact`
 (
-    `ID` INT NOT NULL AUTO_INCREMENT,
+    `ID` INT NOT NULL,
     `FirstName` VARCHAR(50) NOT NULL DEFAULT '',
     `LastName` VARCHAR(50) NOT NULL DEFAULT '',
     `Email` VARCHAR(50) NOT NULL DEFAULT '',
     `PhoneNumber` VARCHAR(50) NOT NULL DEFAULT '',
     `Linkedin` VARCHAR(100) NOT NULL DEFAULT '',
-    PRIMARY KEY (`ID`)
+    `CreationDate` DateTime(3) DEFAULT CURRENT_TIMESTAMP(3)
 ) ENGINE = InnoDB;
 
 INSERT INTO `users` (`Email`, `Password`)
@@ -42,20 +42,20 @@ VALUES
     ('first14.last14@example.com', 'password14'),
     ('first15.last15@example.com', 'password15');
 
-INSERT INTO `contact` (`FirstName`, `LastName`, `PhoneNumber`, `Email`, `Linkedin`)
+INSERT INTO `contact` (ID, `FirstName`, `LastName`, `PhoneNumber`, `Email`, `Linkedin`)
 VALUES
-    ('First1', 'Last1', '000000001', 'first1.last1@example.com', 'https://www.linkedin.com/in/first1last1'),
-    ('First2', 'Last2', '000000002', 'first2.last2@example.com', 'https://www.linkedin.com/in/first2last2'),
-    ('First3', 'Last3', '000000003', 'first3.last3@example.com', 'https://www.linkedin.com/in/first3last3'),
-    ('First4', 'Last4', '000000004', 'first4.last4@example.com', 'https://www.linkedin.com/in/first4last4'),
-    ('First5', 'Last5', '000000005', 'first5.last5@example.com', 'https://www.linkedin.com/in/first5last5'),
-    ('First6', 'Last6', '000000006', 'first6.last6@example.com', 'https://www.linkedin.com/in/first6last6'),
-    ('First7', 'Last7', '000000007', 'first7.last7@example.com', 'https://www.linkedin.com/in/first7last7'),
-    ('First8', 'Last8', '000000008', 'first8.last8@example.com', 'https://www.linkedin.com/in/first8last8'),
-    ('First9', 'Last9', '000000009', 'first9.last9@example.com', 'https://www.linkedin.com/in/first9last9'),
-    ('First10', 'Last10', '000000010', 'first10.last10@example.com', 'https://www.linkedin.com/in/first10last10'),
-    ('First11', 'Last11', '0000000011', 'first11.last11@example.com', 'https://www.linkedin.com/in/first11last11'),
-    ('First12', 'Last12', '0000000012', 'first12.last12@example.com', 'https://www.linkedin.com/in/first12last12'),
-    ('First13', 'Last13', '0000000013', 'first13.last13@example.com', 'https://www.linkedin.com/in/first13last13'),
-    ('First14', 'Last14', '0000000014', 'first14.last14@example.com', 'https://www.linkedin.com/in/first14last14'),
-    ('First15', 'Last15', '0000000015', 'first15.last15@example.com', 'https://www.linkedin.com/in/first15last15');
+    (33, 'First1', 'Last1', '000000001', 'first1.last1@example.com', 'https://www.linkedin.com/in/first1last1'),
+    (33, 'First2', 'Last2', '000000002', 'first2.last2@example.com', 'https://www.linkedin.com/in/first2last2'),
+    (33, 'First3', 'Last3', '000000003', 'first3.last3@example.com', 'https://www.linkedin.com/in/first3last3'),
+    (33, 'First4', 'Last4', '000000004', 'first4.last4@example.com', 'https://www.linkedin.com/in/first4last4'),
+    (33, 'First5', 'Last5', '000000005', 'first5.last5@example.com', 'https://www.linkedin.com/in/first5last5'),
+    (33, 'First6', 'Last6', '000000006', 'first6.last6@example.com', 'https://www.linkedin.com/in/first6last6'),
+    (33, 'First7', 'Last7', '000000007', 'first7.last7@example.com', 'https://www.linkedin.com/in/first7last7'),
+    (33, 'First8', 'Last8', '000000008', 'first8.last8@example.com', 'https://www.linkedin.com/in/first8last8'),
+    (33, 'First9', 'Last9', '000000009', 'first9.last9@example.com', 'https://www.linkedin.com/in/first9last9'),
+    (33, 'First10', 'Last10', '000000010', 'first10.last10@example.com', 'https://www.linkedin.com/in/first10last10'),
+    (33, 'First11', 'Last11', '0000000011', 'first11.last11@example.com', 'https://www.linkedin.com/in/first11last11'),
+    (33, 'First12', 'Last12', '0000000012', 'first12.last12@example.com', 'https://www.linkedin.com/in/first12last12'),
+    (33, 'First13', 'Last13', '0000000013', 'first13.last13@example.com', 'https://www.linkedin.com/in/first13last13'),
+    (33, 'First14', 'Last14', '0000000014', 'first14.last14@example.com', 'https://www.linkedin.com/in/first14last14'),
+    (33, 'First15', 'Last15', '0000000015', 'first15.last15@example.com', 'https://www.linkedin.com/in/first15last15');

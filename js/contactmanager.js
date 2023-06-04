@@ -94,9 +94,9 @@ function logout() {
 function addContact() {
     const addContactFormData = new FormData(addContactForm);
     const addContactFormObject = {};
+    const userIDCookie = getCookie("userID");
+    addContactFormObject["UserID"] = userIDCookie;
     addContactFormData.forEach((value, key) => addContactFormObject[key] = value);
-    addContactFormObject["UserID"] = CookieManager.userID;
-    addContactFormObject["CreationDate"] = formattedDate();
     const addContactFormDataJSON = JSON.stringify(addContactFormObject);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/create_contact.php`, true);
@@ -117,7 +117,7 @@ function addContact() {
 
 function searchContact() {
     const query = document.getElementById("searchText").value;
-    const tmp = { UserID: CookieManager.userID, search_criteria: query };
+    const tmp = { userID: CookieManager.userID, search_criteria: query };
     const jsonPayload = JSON.stringify(tmp);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/search_contact.php`);
@@ -199,7 +199,7 @@ function editContact() {
     const editContactFormData = new FormData(editContactForm);
     const editContactFormObject = {};
     editContactFormData.forEach((value, key) => editContactFormObject[key] = value);
-    editContactFormObject["UserID"] = CookieManager.userID;
+    editContactFormObject["userID"] = CookieManager.userID;
     editContactFormObject["ID"] = editId;
     const editContactFormDataJSON = JSON.stringify(editContactFormObject);
     const myRequest = new XMLHttpRequest();
@@ -233,7 +233,7 @@ function openDeleteModal(i) {
 }
 
 function deleteContact() {
-    const deleteObject = { ID: document.getElementById("deleteContactId").innerHTML, UserID: CookieManager.userID };
+    const deleteObject = { ID: document.getElementById("deleteContactId").innerHTML, userID: CookieManager.userID };
     const deleteObjectJSON = JSON.stringify(deleteObject);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/delete_contact.php`, true);
@@ -251,3 +251,21 @@ function deleteContact() {
         deleteContactResult.innerHTML = error.message;
     }
 };
+
+function getCookie(cookieName) {
+    const name = cookieName + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+    
+    for(let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) === ' ') {
+        cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(name) === 0) {
+        return cookie.substring(name.length, cookie.length);
+      }
+    }
+    
+    return "";
+  }
