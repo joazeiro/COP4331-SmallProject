@@ -15,19 +15,21 @@
     <div class="center-container">
       <div class="container">
         <h2>Login</h2>
-        <form id="LoginForm" method="post" action="#">
-          <div class="form-group">
-            <label for="Login">Email:</label>
-            <input type="email" name="Login" placeholder="User@YourDomain.com" required>
-          </div>
-          <div class="form-group">
-            <label for="Password">Password:</label>
-            <input type="password" name="Password" placeholder="Password" required>
-          </div>
-          <div class="form-group">
-            <input type="submit" value="Login">
-          </div>
-        </form>
+        <div class = "login-input">
+          <form id="LoginForm" method="post" action="#">
+            <div class="form-group">
+              <label for="Login">Email:</label>
+              <input type="email" name="Login" placeholder="user@domain.com" required>
+            </div>
+            <div class="form-group">
+              <label for="Password">Password:</label>
+              <input type="password" name="Password" placeholder="password" required>
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Login">
+            </div>
+          </form>
+        </div>
         <div class="statusText">
           <span id="LoginStatus"></span>
         </div>
