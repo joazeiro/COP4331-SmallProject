@@ -18,9 +18,10 @@ if ($db_connection->connect_error) {
     $email = htmlspecialchars($data["Email"]);
     $phone = htmlspecialchars($data["PhoneNumber"]);
     $linkedin = htmlspecialchars($data["Linkedin"]);
+    $ID = $data["ID"];
 
     // Check if contact with the same email exists
-    $checkEmailQuery = "SELECT * FROM contact WHERE Email = '$email'";
+    $checkEmailQuery = "SELECT * FROM contact WHERE Email = '$email' AND (`ID` = '" . $ID . "' OR `ID` IS NULL)";
     $emailResult = $db_connection->query($checkEmailQuery);
     if ($emailResult->num_rows > 0) {
         $message = '{"message":"A contact with the same email already exists"}';
@@ -31,7 +32,7 @@ if ($db_connection->connect_error) {
     }
 
     // Check if contact with the same phone number exists
-    $checkPhoneQuery = "SELECT * FROM contact WHERE PhoneNumber = '$phone'";
+    $checkPhoneQuery = "SELECT * FROM contact WHERE PhoneNumber = '$phone' AND (`ID` = '" . $ID . "' OR `ID` IS NULL)";
     $phoneResult = $db_connection->query($checkPhoneQuery);
     if ($phoneResult->num_rows > 0) {
         $message = '{"message":"A contact with the same phone number already exists"}';
@@ -42,7 +43,7 @@ if ($db_connection->connect_error) {
     }
 
     // Check if contact with the same LinkedIn profile exists
-    $checkLinkedinQuery = "SELECT * FROM contact WHERE Linkedin = '$linkedin'";
+    $checkLinkedinQuery = "SELECT * FROM contact WHERE Linkedin = '$linkedin' AND (`ID` = '" . $ID . "' OR `ID` IS NULL)";
     $linkedinResult = $db_connection->query($checkLinkedinQuery);
     if ($linkedinResult->num_rows > 0) {
         $message = '{"message":"A contact with the same LinkedIn profile already exists"}';

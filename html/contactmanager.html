@@ -63,7 +63,7 @@
         </div>
         <div class="form-group">
           <label for="Linkedin">Linkedin:</label>
-          <input type="url" name="Linkedin">
+          <input type="url" name="Linkedin" placeholder="https://www.linkedin.com/in/firstlast">
         </div>
         <div class="form-group">
           <input type="submit" value="Add Contact">
@@ -110,15 +110,34 @@
     <div class="container">
       <span id="deleteContactClose" class="close">&times;</span>
       <h2>Delete Contact?</h2>
-      <p>
+      <div class="form-group">
+        <label for="deleteContactFirstName">First Name:</label>
         <span id="deleteContactFirstName"></span>
+      </div>
+      <div class="form-group">
+        <label for="deleteContactLastName">Last Name:</label>
         <span id="deleteContactLastName"></span>
+      </div>
+      <div class="form-group">
+        <label for="deleteContactEmail">Email:</label>
         <span id="deleteContactEmail"></span>
+      </div>
+      <div class="form-group">
+        <label for="deleteContactPhone">PhoneNumber:</label>
         <span id="deleteContactPhone"></span>
+      </div>
+      <div class="form-group">
+        <label for="deleteContactLinkedin">Linkedin:</label>
         <span id="deleteContactLinkedin"></span>
+      </div>
+      <div class="form-group">
+        <label for="deleteContactId">Contact ID:</label>
         <span id="deleteContactId"></span>
+      </div>
+      <div class="form-group">
+        <label for="deleteContactDateCreated">Date Created:</label>
         <span id="deleteContactDateCreated"></span>
-      </p>
+      </div>
       <button type="button" id="deleteCancelButton">Cancel</button>
       <button type="button" id="deleteConfirmButton">Confirm</button>
       <span id="deleteContactResult"></span>

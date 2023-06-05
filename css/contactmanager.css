@@ -138,7 +138,7 @@ body {
   background-color: gray;
   border: none;
   color: white;
-  padding: 8px 32px;
+  padding: 12px 24px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -163,7 +163,7 @@ body {
 
 /* Custom styles for the Contacts HTML */
 
-#logutDiv {
+#logoutDiv {
   text-align: center;
   margin-top: 20px;
 }
@@ -190,8 +190,10 @@ body {
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
-  padding: 10px 16px;
+  padding: 12px 24px;
   border: none;
+  margin: 20px auto;
+  display: block;
 }
 
 #openAddModalButton:hover {
@@ -206,7 +208,7 @@ body {
 
 #contactTable th,
 #contactTable td {
-  padding: 8px;
+  padding: 12px;
   text-align: left;
 }
 
@@ -239,7 +241,7 @@ body {
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
-  padding: 10px 16px;
+  padding: 12px 24px;
   border: none;
 }
 
@@ -252,10 +254,10 @@ body {
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
-  padding: 10px 16px;
+  padding: 12px 24px;
   border: none;
-  margin: 20px auto; 
-  display: block; 
+  margin: 20px auto;
+  display: block;
 }
 
 #openAddModalButton:hover {
@@ -296,7 +298,7 @@ body {
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
-  padding: 10px 16px;
+  padding: 12px 24px;
   border: none;
 }
 

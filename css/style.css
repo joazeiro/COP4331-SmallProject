@@ -63,8 +63,12 @@ body {
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
-  padding: 10px 16px;
+  padding: 12px 24px;
   border: none;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
 }
 
 .form-group input[type="submit"]:hover {
@@ -128,13 +132,18 @@ body {
   background-color: gray;
   border: none;
   color: white;
-  padding: 8px 32px;
+  padding: 12px 24px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 18px;
   margin: 4px 2px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #555;
 }
 
 .myTable {
