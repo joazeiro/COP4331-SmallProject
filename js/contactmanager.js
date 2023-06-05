@@ -169,7 +169,7 @@ function searchContact() {
     const LinkedinCell = myRow.insertCell(4);
     LinkedinCell.innerHTML = o.Linkedin;
     const creationDateCell = myRow.insertCell(5);
-    creationDateCell.innerHTML = o.CreationDate;
+    creationDateCell.innerHTML = o.CreationDate.substring(0, 10);
     const editButtonCell = myRow.insertCell(6);
     const editButton = document.createElement("button");
     editButton.type = "button";
