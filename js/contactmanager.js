@@ -19,7 +19,7 @@ var searchButton = null;
 let editId = -1;
 
 function onDocumentLoad() {
-    // CookieManager.read();
+    CookieManager.read();
     addContactForm = document.getElementById("addContactForm");
     editContactForm = document.getElementById("editContactForm");
     addContactResult = document.getElementById("addContactResult");
