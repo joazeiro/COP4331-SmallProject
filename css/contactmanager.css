@@ -212,6 +212,13 @@ body {
   text-align: left;
 }
 
+#contactTable td {
+  padding: 12px;
+  text-align: left;
+  color: #F8F1F1;
+  border: none;
+}
+
 #contactTable th {
   background-color: #F8F1F1;
   color: #025464;
@@ -314,4 +321,8 @@ body {
   text-align: center;
   margin-top: 20px;
   color: #025464;
+}
+
+.hide {
+  display: none;
 }
