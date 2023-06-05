@@ -210,7 +210,7 @@ function editContact() {
     editContactFormObject["ID"] = editId;
     const editContactFormDataJSON = JSON.stringify(editContactFormObject);
     const myRequest = new XMLHttpRequest();
-    myRequest.open("POST", `${url}/api/edit_contact.php`, true);
+    myRequest.open("POST", `${url}/php/edit_contact.php`, true);
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try {
