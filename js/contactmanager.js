@@ -134,28 +134,29 @@ function searchContact() {
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/search_contact.php`);
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
+  
     try {
-        while (contactTable.rows.length > 1) {
-            contactTable.deleteRow(1);
+      while (contactTable.rows.length > 1) {
+        contactTable.deleteRow(1);
+      }
+  
+      myRequest.onreadystatechange = function () {
+        if (myRequest.readyState == 4 && myRequest.status == 200) {
+          const jsonObject = JSON.parse(myRequest.responseText);
+          const results = jsonObject.results.slice(0, 10); // limits the results to 10 elements
+          results.forEach(o => {
+            addRow(o);
+          });
         }
-
-        myRequest.onreadystatechange = function () {
-            if (myRequest.readyState == 4 && myRequest.status == 200) {
-                const jsonObject = JSON.parse(myRequest.responseText);
-                const results = jsonObject.results.slice(0, 10); // limits the results to 10 elements
-                results.forEach(o => {
-                    addRow(o);
-                });
-            }
-        };
-        myRequest.send(jsonPayload);
+      };
+      myRequest.send(jsonPayload);
     } catch (error) {
-        document.getElementById("searchContactResult") = error.message;
+      document.getElementById("searchContactResult").innerHTML = error.message;
     }
-}
+  }
+  
 
-function addRow(o) {
+  function addRow(o) {
     const myRow = contactTable.insertRow();
     const FirstNameCell = myRow.insertCell(0);
     FirstNameCell.innerHTML = o.FirstName;
@@ -167,25 +168,27 @@ function addRow(o) {
     PhoneCell.innerHTML = o.PhoneNumber;
     const LinkedinCell = myRow.insertCell(4);
     LinkedinCell.innerHTML = o.Linkedin;
-    const IDCell = myRow.insertCell(5);
-    IDCell.innerHTML = o.ID;
-    const creationDateCell = myRow.insertCell(6);
+    const creationDateCell = myRow.insertCell(5);
     creationDateCell.innerHTML = o.CreationDate;
-    const editButtonCell = myRow.insertCell(7);
+    const editButtonCell = myRow.insertCell(6);
     const editButton = document.createElement("button");
     editButton.type = "button";
     editButton.innerHTML = "Edit";
     editButton.className = "button";
     editButton.onclick = () => openEditModal(editButton.parentNode.parentNode.rowIndex);
+    editButtonCell.style.whiteSpace = "nowrap"; // Prevent button text from wrapping
     editButtonCell.appendChild(editButton);
-    const deleteButtonCell = myRow.insertCell(8);
+    const deleteButtonCell = myRow.insertCell(7);
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
     deleteButton.innerHTML = "Delete";
     deleteButton.className = "button";
     deleteButton.onclick = () => openDeleteModal(deleteButton.parentElement.parentElement.rowIndex);
+    deleteButtonCell.style.whiteSpace = "nowrap"; // Prevent button text from wrapping
     deleteButtonCell.appendChild(deleteButton);
-}
+  }
+  
+  
 
 function openEditModal(i) {
     const row = contactTable.getElementsByTagName("tr")[i];
