@@ -20,39 +20,6 @@ if ($db_connection->connect_error) {
     $linkedin = htmlspecialchars($data["Linkedin"]);
     $ID = $data["ID"];
 
-    // Check if contact with the same email exists
-    $checkEmailQuery = "SELECT * FROM contact WHERE Email = '$email' AND (`ID` = '" . $ID . "' OR `ID` IS NULL)";
-    $emailResult = $db_connection->query($checkEmailQuery);
-    if ($emailResult->num_rows > 0) {
-        $message = '{"message":"A contact with the same email already exists"}';
-        header('Content-type: application/json');
-        echo $message;
-        $db_connection->close();
-        exit;
-    }
-
-    // Check if contact with the same phone number exists
-    $checkPhoneQuery = "SELECT * FROM contact WHERE PhoneNumber = '$phone' AND (`ID` = '" . $ID . "' OR `ID` IS NULL)";
-    $phoneResult = $db_connection->query($checkPhoneQuery);
-    if ($phoneResult->num_rows > 0) {
-        $message = '{"message":"A contact with the same phone number already exists"}';
-        header('Content-type: application/json');
-        echo $message;
-        $db_connection->close();
-        exit;
-    }
-
-    // Check if contact with the same LinkedIn profile exists
-    $checkLinkedinQuery = "SELECT * FROM contact WHERE Linkedin = '$linkedin' AND (`ID` = '" . $ID . "' OR `ID` IS NULL)";
-    $linkedinResult = $db_connection->query($checkLinkedinQuery);
-    if ($linkedinResult->num_rows > 0) {
-        $message = '{"message":"A contact with the same LinkedIn profile already exists"}';
-        header('Content-type: application/json');
-        echo $message;
-        $db_connection->close();
-        exit;
-    }
-
     $sql = sprintf(
         "INSERT INTO contact (ID, FirstName, LastName, PhoneNumber, Email, Linkedin) 
          VALUES ('%d', '%s', '%s', '%s', '%s', '%s');",

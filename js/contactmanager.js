@@ -19,9 +19,9 @@ var searchButton = null;
 let editId = -1;
 
 function onDocumentLoad() {
-    // CookieManager.read();
+    CookieManager.read();
     addContactForm = document.getElementById("addContactForm");
-    editContactForm = document.getElementById("editContactForm");
+    editContactForm = document.getElementById("editContactForm"); 
     addContactResult = document.getElementById("addContactResult");
     addContactModal = document.getElementById("addContactModal");
     editContactModal = document.getElementById("editContactModal");
@@ -29,15 +29,14 @@ function onDocumentLoad() {
     contactTable = document.getElementById("contactTable");
     searchContact(); // populate contacts
 
-    if (editContactForm != null) {
+    if(editContactForm != null){
         editContactForm.addEventListener("submit", (event) => {
             event.preventDefault();
             editContact();
-            searchContact();
         });
     }
 
-    if (addContactForm != null) {
+    if(addContactForm != null){
         addContactForm.addEventListener("submit", (event) => {
             event.preventDefault();
             addContact();
@@ -46,51 +45,50 @@ function onDocumentLoad() {
     }
 
     logoutButton = document.getElementById("logoutButton");
-    if (logoutButton != null) {
+    if(logoutButton != null){
         logoutButton.onclick = () => logout();
     }
 
     openAddModalButton = document.getElementById("openAddModalButton")
-    if (openAddModalButton != null) {
-        openAddModalButton.onclick = () => {
-            addContactModal.style.display = "block";
-            addContactResult.innerHTML = ""; //
-            searchContact();
-        };
+    if(openAddModalButton != null){
+        openAddModalButton.onclick = () => addContactModal.style.display = "block";
     }
-    
+
     addContactClose = document.getElementById("addContactClose")
-    if (addContactClose != null) {
-        addContactClose.onclick = () => addContactModal.style.display = "none";
+    if(addContactClose != null){
+        addContactClose.onclick = () => { 
+            searchContact();
+            addContactModal.style.display = "none";
+        }
     }
     
     editContactClose = document.getElementById("editContactClose")
-    if (editContactClose != null) {
+    if(editContactClose != null){
         editContactClose.onclick = () => editContactModal.style.display = "none";
     }
-    
+
     deleteContactClose = document.getElementById("deleteContactClose");
-    if (deleteContactClose != null) {
+    if(deleteContactClose != null){
         deleteContactClose.onclick = () => deleteContactModal.style.display = "none";
     }
-    
+
     var deleteCancelButton = document.getElementById("deleteCancelButton");
-    if (deleteCancelButton != null) {
+    if(deleteCancelButton != null){
         deleteCancelButton.onclick = () => deleteContactModal.style.display = "none";
     }
-
+    
     deleteConfirmButton = document.getElementById("deleteConfirmButton");
-    if (deleteConfirmButton != null) {
+    if(deleteConfirmButton != null){
         deleteConfirmButton.onclick = () => deleteContact();
     }
 
     searchButton = document.getElementById("searchButton")
-    if (searchButton != null) {
+    if(searchButton != null){
         searchButton.onclick = () => searchContact();
     }
 
     //addRow({FirstName: "Rick", LastName: "Leinecker", Email: "myemail@email.com", PhoneNumber: "999-999-9999", Linkedin: "www.google.com", Id: "1", CreationDate: formattedDate()});
-
+    
 }
 
 function logout() {
@@ -110,12 +108,12 @@ function addContact() {
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try {
-        myRequest.onreadystatechange = function () {
+        myRequest.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 const jsonObject = JSON.parse(myRequest.responseText);
                 if (jsonObject.success) {
                     addContactResult.innerHTML = jsonObject.message;
-                    searchContact(); // Run searchContact() after adding a contact
+                    searchContact();
                 } else {
                     addContactResult.innerHTML = jsonObject.message;
                 }
@@ -129,34 +127,33 @@ function addContact() {
 
 function searchContact() {
     const query = document.getElementById("searchText").value;
-    const tmp = { ID: getCookie("ID"), search_criteria: query };
+    const tmp = { ID: getCookie("ID"), search_criteria: query};
     const jsonPayload = JSON.stringify(tmp);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/search_contact.php`);
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-  
-    try {
-      while (contactTable.rows.length > 1) {
-        contactTable.deleteRow(1);
-      }
-  
-      myRequest.onreadystatechange = function () {
-        if (myRequest.readyState == 4 && myRequest.status == 200) {
-          const jsonObject = JSON.parse(myRequest.responseText);
-          const results = jsonObject.results.slice(0, 10); // limits the results to 10 elements
-          results.forEach(o => {
-            addRow(o);
-          });
-        }
-      };
-      myRequest.send(jsonPayload);
-    } catch (error) {
-      document.getElementById("searchContactResult").innerHTML = error.message;
-    }
-  }
-  
 
-  function addRow(o) {
+    try {
+        while (contactTable.rows.length > 1) {
+            contactTable.deleteRow(1);
+        }
+
+        myRequest.onreadystatechange = function() {
+            if (myRequest.readyState == 4 && myRequest.status == 200) {
+                const jsonObject = JSON.parse(myRequest.responseText);
+                const results = jsonObject.results.slice(0, 10); // Limit the results to 10 elements
+                results.forEach(o => {
+                    addRow(o);
+                });
+            }
+        };
+        myRequest.send(jsonPayload);
+    } catch (error) {
+        document.getElementById("searchContactResult") = error.message;
+    }
+}
+
+function addRow(o) {
     const myRow = contactTable.insertRow();
     const FirstNameCell = myRow.insertCell(0);
     FirstNameCell.innerHTML = o.FirstName;
@@ -168,27 +165,25 @@ function searchContact() {
     PhoneCell.innerHTML = o.PhoneNumber;
     const LinkedinCell = myRow.insertCell(4);
     LinkedinCell.innerHTML = o.Linkedin;
-    const creationDateCell = myRow.insertCell(5);
+    const IDCell = myRow.insertCell(5);
+    IDCell.innerHTML = ""
+    const creationDateCell = myRow.insertCell(6);
     creationDateCell.innerHTML = o.CreationDate;
-    const editButtonCell = myRow.insertCell(6);
+    const editButtonCell = myRow.insertCell(7);
     const editButton = document.createElement("button");
     editButton.type = "button";
     editButton.innerHTML = "Edit";
     editButton.className = "button";
     editButton.onclick = () => openEditModal(editButton.parentNode.parentNode.rowIndex);
-    editButtonCell.style.whiteSpace = "nowrap"; // Prevent button text from wrapping
     editButtonCell.appendChild(editButton);
-    const deleteButtonCell = myRow.insertCell(7);
+    const deleteButtonCell = myRow.insertCell(8);
     const deleteButton = document.createElement("button");
     deleteButton.type = "button";
     deleteButton.innerHTML = "Delete";
     deleteButton.className = "button";
     deleteButton.onclick = () => openDeleteModal(deleteButton.parentElement.parentElement.rowIndex);
-    deleteButtonCell.style.whiteSpace = "nowrap"; // Prevent button text from wrapping
     deleteButtonCell.appendChild(deleteButton);
-  }
-  
-  
+}
 
 function openEditModal(i) {
     const row = contactTable.getElementsByTagName("tr")[i];
@@ -214,7 +209,7 @@ function editContact() {
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try {
-        myRequest.onreadystatechange = function () {
+        myRequest.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 const jsonObject = JSON.parse(myRequest.responseText);
                 addContactResult.innerHTML = jsonObject.message;
@@ -241,40 +236,40 @@ function openDeleteModal(i) {
 }
 
 function deleteContact() {
-    const deleteObject = { CreationDate: document.getElementById("deleteContactDateCreated").innerHTML };
+    const deleteObject = {CreationDate: document.getElementById("deleteContactDateCreated").innerHTML};
     const deleteObjectJSON = JSON.stringify(deleteObject);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/delete_contact.php`, true);
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try {
-        myRequest.onreadystatechange = function () {
+        myRequest.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 const jsonObject = JSON.parse(myRequest.responseText);
                 document.getElementById("deleteContactResult").innerHTML = jsonObject.message;
-                searchContact();
             }
         };
         myRequest.send(deleteObjectJSON);
     } catch (error) {
         deleteContactResult.innerHTML = error.message;
     }
+    searchContact(); // populate contacts
 };
 
 function getCookie(cookieName) {
     const name = cookieName + "=";
     const decodedCookie = decodeURIComponent(document.cookie);
     const cookieArray = decodedCookie.split(';');
-
-    for (let i = 0; i < cookieArray.length; i++) {
-        let cookie = cookieArray[i];
-        while (cookie.charAt(0) === ' ') {
-            cookie = cookie.substring(1);
-        }
-        if (cookie.indexOf(name) === 0) {
-            return cookie.substring(name.length, cookie.length);
-        }
+    
+    for(let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) === ' ') {
+        cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(name) === 0) {
+        return cookie.substring(name.length, cookie.length);
+      }
     }
-
+    
     return "";
-}
+  }

@@ -64,7 +64,7 @@ body {
 }
 
 .form-group input[type="submit"] {
-  background-color: #E57C23;
+  background-color: orange;
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
@@ -77,7 +77,7 @@ body {
 }
 
 .form-group input[type="submit"]:hover {
-  background-color: #E8AA42;
+  background-color: orange;
 }
 
 .link {
@@ -163,4 +163,9 @@ body {
 
 .registrationResult {
   text-align: center;
+}
+
+body {
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fc.wallhere.com%2Fimages%2Fed%2F78%2F4bd719efbc787b3e281a667e6c5d-2055787.jpg!d&f=1&nofb=1&ipt=844b62ca8e31bfc8b4f0daf491703798923ce5f4c874c409f8c343f083e145b2&ipo=images');
+  background-size: cover;
 }

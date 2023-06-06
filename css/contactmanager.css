@@ -78,7 +78,7 @@ body {
 }
 
 .form-group input[type="submit"]:hover {
-  background-color: #E8AA42;
+  background-color: orange;
 }
 
 .link {
@@ -135,7 +135,7 @@ body {
 }
 
 .button {
-  background-color: gray;
+  background-color: orange;
   border: none;
   color: white;
   padding: 12px 24px;
@@ -173,20 +173,21 @@ body {
 }
 
 #logoutButton {
-  background-color: #E57C23;
+  background-color: gray;
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
   padding: 10px 16px;
   border: none;
+  margin-left: 10px;
 }
 
 #logoutButton:hover {
-  background-color: #E8AA42;
+  background-color: orange;
 }
 
 #openAddModalButton {
-  background-color: #E57C23;
+  background-color: gray;
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
@@ -197,7 +198,7 @@ body {
 }
 
 #openAddModalButton:hover {
-  background-color: #E8AA42;
+  background-color: orange;
 }
 
 #contactTable {
@@ -210,6 +211,7 @@ body {
 #contactTable td {
   padding: 12px;
   text-align: left;
+  background-color: #025464;
 }
 
 #contactTable td {
@@ -244,7 +246,7 @@ body {
 }
 
 #searchButton {
-  background-color: #E57C23;
+  background-color: gray;
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
@@ -253,11 +255,11 @@ body {
 }
 
 #searchButton:hover {
-  background-color: #E8AA42;
+  background-color: orange;
 }
 
 #openAddModalButton {
-  background-color: #E57C23;
+  background-color: gray;
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
@@ -268,7 +270,7 @@ body {
 }
 
 #openAddModalButton:hover {
-  background-color: #E8AA42;
+  background-color: orange;
 }
 
 #addContactModal,
@@ -301,7 +303,7 @@ body {
 
 #deleteCancelButton,
 #deleteConfirmButton {
-  background-color: #E57C23;
+  background-color: orange;
   color: #F8F1F1;
   cursor: pointer;
   border-radius: 5px;
@@ -311,7 +313,7 @@ body {
 
 #deleteCancelButton:hover,
 #deleteConfirmButton:hover {
-  background-color: #E8AA42;
+  background-color: orange;
 }
 
 #addContactResult,
@@ -325,4 +327,9 @@ body {
 
 .hide {
   display: none;
+}
+
+body {
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fc.wallhere.com%2Fimages%2Fed%2F78%2F4bd719efbc787b3e281a667e6c5d-2055787.jpg!d&f=1&nofb=1&ipt=844b62ca8e31bfc8b4f0daf491703798923ce5f4c874c409f8c343f083e145b2&ipo=images');
+  background-size: cover;
 }
