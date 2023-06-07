@@ -17,6 +17,7 @@ var deleteContactClose = null;
 var deleteConfirmButton = null;
 var searchButton = null;
 var indexEditButtonContact = null;
+var searchContactResult = null;
 let editId = -1;
 
 function onDocumentLoad() {
@@ -28,6 +29,7 @@ function onDocumentLoad() {
     editContactModal = document.getElementById("editContactModal");
     deleteContactModal = document.getElementById("deleteContactModal");
     contactTable = document.getElementById("contactTable");
+    searchContactResult = document.getElementById("searchContactResult");
     searchContact(); // populate contacts
 
     if(editContactForm != null){
@@ -150,7 +152,7 @@ function searchContact() {
         };
         myRequest.send(jsonPayload);
     } catch (error) {
-        document.getElementById("searchContactResult") = error.message;
+        searchContactResult = error.message;
     }
 }
 
