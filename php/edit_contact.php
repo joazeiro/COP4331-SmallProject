@@ -21,18 +21,45 @@ if ($db_connection->connect_error) {
     $phoneNumber = $db_connection->real_escape_string($data["PhoneNumber"]);
     $linkedin = $db_connection->real_escape_string($data["Linkedin"]);
 
-    $sql = "UPDATE contact SET 
-                FirstName = '$firstName', 
-                LastName = '$lastName', 
-                Email = '$email', 
-                PhoneNumber = '$phoneNumber', 
-                Linkedin = '$linkedin' 
-            WHERE ID = $id";
+    $originalFirstName = $db_connection->real_escape_string($data["originalFirstName"]);
+    $originalLastName = $db_connection->real_escape_string($data["originalLastName"]);
+    $originalEmail = $db_connection->real_escape_string($data["originalEmail"]);
+    $originalPhoneNumber = $db_connection->real_escape_string($data["originalPhoneNumber"]);
+    $originalLinkedin = $db_connection->real_escape_string($data["originalLinkedin"]);
+
+    $getCreationDate = "SELECT CreationDate FROM contact WHERE 
+        (`FirstName` LIKE '%" . $originalFirstName . "%' 
+        AND `LastName` LIKE '%" . $originalLastName . "%' 
+        AND `PhoneNumber` LIKE '%" . $originalPhoneNumber . "%' 
+        AND `Email` LIKE '%" . $originalEmail . "%' 
+        AND `Linkedin` LIKE '%" . $originalLinkedin . "%') 
+        AND (`ID` = '" . $id . "' OR `ID` IS NULL) 
+        LIMIT 10;";
+
+    $result = $db_connection->query($getCreationDate);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+
+        $creationDate = $row['CreationDate'];
+
+        echo $creationDate;
+        
+        $sql = "UPDATE contact SET 
+            FirstName = '$firstName', 
+            LastName = '$lastName', 
+            Email = '$email', 
+            PhoneNumber = '$phoneNumber', 
+            Linkedin = '$linkedin' 
+        WHERE CreationDate = '$creationDate'";
 
     if ($db_connection->query($sql) === true) {
         $response = array('message' => 'Updated');
     } else {
         $response = array('message' => 'Not Updated');
+    }
+    } else {
+        $response = array('message' => 'Record Not Found');
     }
 
     $db_connection->close();
