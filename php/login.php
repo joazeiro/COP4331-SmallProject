@@ -3,6 +3,12 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
+header('Access-Control-Allow-Origin: http://www.parkercmcleod.com');
+
+header('Access-Control-Allow-Methods: GET, POST');
+
+header("Access-Control-Allow-Headers: X-Requested-With");
+
 $data = get_info();
 $db_username = "db";
 $db_pwd = "KZXyk.N@JHc3gPu";
