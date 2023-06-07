@@ -28,6 +28,7 @@ function sendData() {
     const LoginFormObject = {};
     LoginFormData.forEach((value, key) => LoginFormObject[key] = value);
     const LoginFormDataJSON = JSON.stringify(LoginFormObject);
+    alert(LoginFormDataJSON);
     // {
     //     "ID": "33",
     //     "Email": "parkercmcleod@gmail.com",
