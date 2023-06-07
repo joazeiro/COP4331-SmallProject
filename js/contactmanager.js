@@ -18,6 +18,7 @@ var deleteConfirmButton = null;
 var searchButton = null;
 var indexEditButtonContact = null;
 var searchContactResult = null;
+var editContactResult = null;
 let editId = -1;
 
 function onDocumentLoad() {
@@ -27,6 +28,7 @@ function onDocumentLoad() {
     addContactResult = document.getElementById("addContactResult");
     addContactModal = document.getElementById("addContactModal");
     editContactModal = document.getElementById("editContactModal");
+    editContactResult = document.getElementById("editContactResult");
     deleteContactModal = document.getElementById("deleteContactModal");
     contactTable = document.getElementById("contactTable");
     searchContactResult = document.getElementById("searchContactResult");
@@ -230,12 +232,12 @@ function editContact() {
         myRequest.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 const jsonObject = JSON.parse(myRequest.responseText);
-                addContactResult.innerHTML = jsonObject.message;
+                editContactResult.innerHTML = jsonObject.message;
             }
         };
         myRequest.send(editContactFormDataJSON);
     } catch (error) {
-        addContactResult.innerHTML = error.message;
+        editContactResult.innerHTML = error.message;
     }
 }
 
