@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 
 header('Access-Control-Allow-Origin: http://www.parkercmcleod.com');
 
-header('Access-Control-Allow-Methods: GET, POST');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE');
 
 header("Access-Control-Allow-Headers: X-Requested-With");
 
