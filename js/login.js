@@ -28,6 +28,12 @@ function sendData() {
     const LoginFormObject = {};
     LoginFormData.forEach((value, key) => LoginFormObject[key] = value);
     const LoginFormDataJSON = JSON.stringify(LoginFormObject);
+    // {
+    //     "ID": "33",
+    //     "Email": "parkercmcleod@gmail.com",
+    //     "Password": "password",
+    //     "error": ""
+    // }
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/login.php`);
     myRequest.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -37,15 +43,15 @@ function sendData() {
             if (this.readyState === 4 && this.status === 200) {
                 console.log(myRequest.responseText)
                 const jsonObject = JSON.parse(myRequest.responseText);
-                CookieManager.userID = jsonObject.ID;
+                CookieManager.ID = jsonObject.ID;
+                CookieManager.Email = jsonObject.Email;
+                CookieManager.Password = jsonObject.Password;
 
-                if (CookieManager.userID < 1) {
+                if (CookieManager.ID < 1) {
                     document.getElementById("LoginStatus").innerHTML = "Incorrect username and password combination.";
                     return;
                 }
 
-                CookieManager.FirstName = jsonObject.FirstName;
-                CookieManager.LastName = jsonObject.LastName;
                 CookieManager.save();
                 window.location.href = "../html/contactmanager.html";
             }

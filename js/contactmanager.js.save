@@ -16,7 +16,6 @@ var editContactClose = null;
 var deleteContactClose = null;
 var deleteConfirmButton = null;
 var searchButton = null;
-var indexEditButtonContact = null;
 let editId = -1;
 
 function onDocumentLoad() {
@@ -187,8 +186,7 @@ function addRow(o) {
 }
 
 function openEditModal(i) {
-    indexEditButtonContact = i;
-    const row = contactTable.getElementsByTagName("tr")[indexEditButtonContact];
+    const row = contactTable.getElementsByTagName("tr")[i];
     const cells = row.getElementsByTagName("td");
     document.getElementById("editFirstName").value = cells[0].innerHTML;
     document.getElementById("editLastName").value = cells[1].innerHTML;
@@ -200,25 +198,11 @@ function openEditModal(i) {
 }
 
 function editContact() {
-    const row = contactTable.getElementsByTagName("tr")[indexEditButtonContact];
-    const cells = row.getElementsByTagName("td");
-    const originalFirstName = cells[0].innerHTML;
-    const originalLastName = cells[1].innerHTML;
-    const originalEmail = cells[2].innerHTML;
-    const originalPhoneNumber = cells[3].innerHTML;
-    const originalLinkedin = cells[4].innerHTML;
-
     const editContactFormData = new FormData(editContactForm);
     const editContactFormObject = {};
     editContactFormData.forEach((value, key) => editContactFormObject[key] = value);
-    
-    editContactFormObject["originalFirstName"] = originalFirstName;
-    editContactFormObject["originalLastName"] = originalLastName;
-    editContactFormObject["originalEmail"] = originalEmail;
-    editContactFormObject["originalPhoneNumber"] = originalPhoneNumber;
-    editContactFormObject["originalLinkedin"] = originalLinkedin;
-
     editContactFormObject["ID"] = getCookie("ID");
+    editContactFormObject["ID"] = editId;
     const editContactFormDataJSON = JSON.stringify(editContactFormObject);
     const myRequest = new XMLHttpRequest();
     myRequest.open("POST", `${url}/php/edit_contact.php`, true);
@@ -237,7 +221,7 @@ function editContact() {
     }
 }
 
-function openDeleteModal(i) {
+byfunction openDeleteModal(i) {
     document.getElementById("deleteContactResult").innerHTML = "";
     const row = contactTable.getElementsByTagName("tr")[i];
     const cells = row.getElementsByTagName("td");
